@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "babel-eslint": "^8.0.3",
+    "eslint": "^4.12.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-react": "^1.1.7",
+    "eslint-plugin-flow": "^2.29.1",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-react": "^7.5.1",
+    "prettier": "^1.9.0"
+  },
+  "name": "greenspace-app-react",
+  "version": "0.1.0",
+  "description":
+    "Application connects owners of plots of open residential land - greenspaces - with small-scale farmers looking for plots to farm on - React implementation",
+  "repository": "git@github.com:mercantilism/greenspace-app-react.git",
+  "author": "Sam Gardner <samuel.galen.gardner@gmail.com>",
+  "license": "MIT"
+}
