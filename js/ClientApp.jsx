@@ -10,6 +10,7 @@ const renderApp = () => {
     <BrowserRouter>
       <App />
     </BrowserRouter>,
+    // $FlowFixMe
     document.getElementById('app')
   );
 };
