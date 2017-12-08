@@ -19,7 +19,7 @@ const GreenspaceCard = (props: Greenspace) => {
     spaceMainImage = <p>No main image</p>;
   }
   return (
-    <Link to={`/greenspace/:${props.id}`}>
+    <Link to={`/greenspace/${props.id}`}>
       <div>
         {spaceMainImage}
         <div>
