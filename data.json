@@ -1,7 +1,7 @@
 {
   "greenspaces": [
     {
-      "_id": "5a29fef971210f7fc7701149",
+      "id": "5a29fef971210f7fc7701149",
       "name": "excepteur ullamco officia",
       "images": ["balloons.jpg"],
       "address": "374 Orange Street, Waterloo, South Carolina, 3987",
@@ -13,7 +13,7 @@
       "landownerID": "5a29fef97d301eee432ba5be"
     },
     {
-      "_id": "5a29fef9641a5e077c290c65",
+      "id": "5a29fef9641a5e077c290c65",
       "name": "reprehenderit in sit",
       "images": ["fruit-stall.jpg"],
       "address": "701 Tech Place, Neahkahnie, Indiana, 8091",
@@ -25,7 +25,7 @@
       "landownerID": "5a29fef91bc0806cf9b42afd"
     },
     {
-      "_id": "5a29fef92cfef85b3fb4361e",
+      "id": "5a29fef92cfef85b3fb4361e",
       "name": "cillum ullamco excepteur",
       "images": ["man-on-bench.jpg"],
       "address": "801 Rost Place, Bannock, Virgin Islands, 4334",
@@ -37,7 +37,7 @@
       "landownerID": "5a29fef9679fb68df2f3fba5"
     },
     {
-      "_id": "5a29fef9724583b280c5a91a",
+      "id": "5a29fef9724583b280c5a91a",
       "name": "est fugiat quis",
       "images": ["pipe-sculpture.jpg"],
       "address": "406 Garden Street, Cucumber, Nevada, 9377",
@@ -49,7 +49,7 @@
       "landownerID": "5a29fef9d0ca4a4da04fbb94"
     },
     {
-      "_id": "5a29fef9d6811b3c10f84c0f",
+      "id": "5a29fef9d6811b3c10f84c0f",
       "name": "labore velit voluptate",
       "images": ["toadstools.jpg"],
       "address": "530 Argyle Road, Lafferty, Washington, 8011",
@@ -61,7 +61,7 @@
       "landownerID": "5a29fef9cb398a8d4c56c9b9"
     },
     {
-      "_id": "5a29fef9bdee7494c38c1306",
+      "id": "5a29fef9bdee7494c38c1306",
       "name": "cupidatat laboris ea",
       "images": ["tree.jpg"],
       "address": "509 Oakland Place, Linganore, Illinois, 1480",
@@ -73,7 +73,7 @@
       "landownerID": "5a29fef9773ac97338260690"
     },
     {
-      "_id": "5a29fef94a6ca9b3c4ee8ee2",
+      "id": "5a29fef94a6ca9b3c4ee8ee2",
       "name": "eu nisi Lorem",
       "images": ["woodtextures.jpg"],
       "address": "100 Highlawn Avenue, Crumpler, California, 4109",
@@ -85,7 +85,7 @@
       "landownerID": "5a29fef9c31ff3122ba7583c"
     },
     {
-      "_id": "5a29fef933727c388db94c19",
+      "id": "5a29fef933727c388db94c19",
       "name": "Lorem sit culpa",
       "images": ["yellowballoon.jpg"],
       "address": "924 Remsen Street, Southmont, Guam, 8842",

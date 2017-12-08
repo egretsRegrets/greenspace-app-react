@@ -10,12 +10,12 @@ declare type farmerParticipationLevel = 'solo Farmer' | 'co-Farmer' | 'helping H
 declare type greenspaceTags = 'backyard' | 'front-yard' | 'full-yard' | 'large plot' | 'micro plot';
 
 export type Greenspace = {
-  _id: string,
+  id: string,
   name: string,
   images?: Array<string>,
   address: string,
   description: string,
-  tags: greenspaceTags,
+  tags: Array<greenspaceTags>,
   farmerDesired: boolean,
   farmerParticipation: farmerParticipationLevel,
   landownerID: string
