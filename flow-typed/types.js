@@ -6,6 +6,19 @@ declare var module: {
   }
 };
 
+declare type farmerParticipationLevel = 'Solo Farmer' | 'Co-Farmer' | 'Helping Hand';
+
+export type Greenspace = {
+  id: string,
+  name: string,
+  images?: Array<string>,
+  address: string,
+  description: string,
+  farmerDesired: boolean,
+  farmerParticipation: farmerParticipationLevel,
+  landownerID: string
+};
+
 declare type ActionType = 'SET_TEST_PHRASE';
 
 declare type ActionT<A: ActionType, P> = {|
