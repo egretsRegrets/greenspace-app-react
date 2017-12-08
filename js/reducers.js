@@ -10,6 +10,13 @@ const testPhrase = (state = '', action: Action) => {
   return state;
 };
 
-const rootReducer = combineReducers({ testPhrase });
+const user = (state = { name: '' }, action: Action) => {
+  if (action) {
+    return state;
+  }
+  return state;
+};
+
+const rootReducer = combineReducers({ testPhrase, user });
 
 export default rootReducer;
