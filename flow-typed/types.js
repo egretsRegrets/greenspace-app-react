@@ -6,14 +6,16 @@ declare var module: {
   }
 };
 
-declare type farmerParticipationLevel = 'Solo Farmer' | 'Co-Farmer' | 'Helping Hand';
+declare type farmerParticipationLevel = 'solo Farmer' | 'co-Farmer' | 'helping Hand';
+declare type greenspaceTags = 'backyard' | 'front-yard' | 'full-yard' | 'large plot' | 'micro plot';
 
 export type Greenspace = {
-  id: string,
+  _id: string,
   name: string,
   images?: Array<string>,
   address: string,
   description: string,
+  tags: greenspaceTags,
   farmerDesired: boolean,
   farmerParticipation: farmerParticipationLevel,
   landownerID: string
