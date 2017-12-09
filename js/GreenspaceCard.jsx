@@ -47,7 +47,11 @@ const GreenspaceCard = (props: Greenspace) => {
           <p className="mt2 mb3 f5 lh-copy helvetica">{props.address}</p>
           <div className="flex ph1 avenir">
             <ul className="w-50 mt0 pl3 tl">
-              {props.tags.map(tag => <li className="mv1 ttc f6 dark-green">{tag}</li>)}
+              {props.tags.map(tag => (
+                <li key={Math.random()} className="mv1 ttc f6 dark-green">
+                  {tag}
+                </li>
+              ))}
             </ul>
             <div className="w-50 f7 tc">{seekingFarmer}</div>
           </div>
