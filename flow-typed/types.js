@@ -12,6 +12,7 @@ declare type greenspaceTags = 'backyard' | 'front-yard' | 'full-yard' | 'large p
 export type Greenspace = {
   id: string,
   name: string,
+  mainImage?: string,
   images?: Array<string>,
   address: string,
   description: string,
