@@ -17,25 +17,20 @@ const App = () => (
   <Provider store={store}>
     <div className="app">
       <GlobalHeader />
-      <div className="pv6 ph5">
-        <Switch>
-          <Route exact path="/" component={Landing} />
-          <Route
-            path="/greenspaces"
-            component={props => <Greenspaces greenspaces={preload.greenspaces} {...props} />}
-          />
-          <Route
-            path="/greenspace/:id"
-            component={(props: { match: Match }) => {
-              const selectedGreenspace = preload.greenspaces.find(
-                (greenspace: Greenspace) => greenspace.id === props.match.params.id
-              );
-              return <GreenspaceDetail greenspace={selectedGreenspace} {...props} />;
-            }}
-          />
-          <Route component={FourOhFour} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route path="/greenspaces" component={props => <Greenspaces greenspaces={preload.greenspaces} {...props} />} />
+        <Route
+          path="/greenspace/:id"
+          component={(props: { match: Match }) => {
+            const selectedGreenspace = preload.greenspaces.find(
+              (greenspace: Greenspace) => greenspace.id === props.match.params.id
+            );
+            return <GreenspaceDetail greenspace={selectedGreenspace} {...props} />;
+          }}
+        />
+        <Route component={FourOhFour} />
+      </Switch>
     </div>
   </Provider>
 );
