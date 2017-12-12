@@ -6,8 +6,9 @@ declare var module: {
   }
 };
 
-declare type farmerParticipationLevel = 'solo Farmer' | 'co-Farmer' | 'helping Hand';
+declare type farmerParticipationLevel = 'solo Farmer' | 'co-Farmer' | 'helping hand';
 declare type greenspaceTags = 'backyard' | 'front-yard' | 'full-yard' | 'large plot' | 'micro plot';
+declare type cropTypes = 'fruits' | 'vegetables' | 'herbs' | 'ornamental';
 
 export type Greenspace = {
   id: string,
@@ -19,7 +20,38 @@ export type Greenspace = {
   tags: Array<greenspaceTags>,
   farmerDesired: boolean,
   farmerParticipation: farmerParticipationLevel,
-  landownerID: string
+  landownerID: string,
+  plannedCrops: Array<cropTypes>
+};
+
+declare type farmingExperienceLevel = 'Expert' | 'Intermediate' | 'Novice';
+declare type farmingSkills =
+  | 'Fruits'
+  | 'Vegetables'
+  | 'Herbs'
+  | 'Farming Education'
+  | 'Home Gardening'
+  | 'Sustainability'
+  | 'Organic'
+  | 'CSA'
+  | 'Farmers Market';
+declare type landOwnerParticipationLevels = 'hands-off' | 'helping hand' | 'co-farmer';
+
+export type User = {
+  id: string,
+  landOwner: boolean,
+  farmer: boolean,
+  name: string,
+  bio: string,
+  profileImage: string,
+  emailAddress: string,
+  community: string,
+  ownedPropertyIDs?: string,
+  desiredLandOwnerParticipation?: landOwnerParticipationLevels,
+  farmingPropertyIDs?: string,
+  farmingExperienceLevel?: farmingExperienceLevel,
+  farmingSkills?: Array<farmingSkills>,
+  desiredPlotSize?: string
 };
 
 declare type ActionType = 'SET_TEST_PHRASE';
