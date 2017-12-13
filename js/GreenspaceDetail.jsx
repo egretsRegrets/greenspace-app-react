@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import preload from '../data.json';
 
 const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
-  const landOwner: User = preload.users.find((user: User) => user.id === props.greenspace.landownerID);
+  const greenspaceOwner: User = preload.users.find((user: User) => user.id === props.greenspace.landownerID);
   let mainBgImg;
   let seekingFarmer;
   if (props.greenspace.mainImage) {
@@ -42,17 +42,17 @@ const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
             {props.greenspace.address}
           </p>
           <div className="mr4">{seekingFarmer}</div>
-          <Link className="no-underline link dim" to={`/user/${landOwner.id}`}>
+          <Link className="no-underline link dim" to={`/user/${greenspaceOwner.id}`}>
             <div className="flex">
               <p className="mr3 f5 tr lh-title avenir ttc i b black-70" style={{ paddingTop: '12px' }}>
-                {`${landOwner.userName}'s`}
+                {`${greenspaceOwner.userName}'s`}
                 <br />
                 Greenspace
               </p>
               <div
                 className="mt3 br-100 bg-center cover"
                 style={{
-                  backgroundImage: `url(/public/images/profile_images/${landOwner.profileImage})`,
+                  backgroundImage: `url(/public/images/profile_images/${greenspaceOwner.profileImage})`,
                   height: '54px',
                   width: '54px'
                 }}
