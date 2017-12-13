@@ -2,18 +2,19 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import preload from '../data.json';
 
 const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
+  const landOwner: User = preload.users.find((user: User) => user.id === props.greenspace.landownerID);
   let mainBgImg;
   let seekingFarmer;
   if (props.greenspace.mainImage) {
     mainBgImg = (
       <div
-        className="w-100 vh-75 bg-center"
+        className="w-100 vh-75 bg-center cover"
         style={{
           backgroundImage: `url(/public/images/${props.greenspace.mainImage})`,
-          backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover'
+          backgroundRepeat: 'no-repeat'
         }}
       />
     );
@@ -21,7 +22,7 @@ const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
   if (props.greenspace.farmerDesired) {
     seekingFarmer = (
       <Link to="/" className="dib mv4 ph3 pv2 ba bw1 br-pill dim link no-underline light-red">
-        Seeking Farmer
+        Become a Farmer
       </Link>
     );
   } else {
@@ -35,12 +36,29 @@ const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
     <section style={{ paddingTop: '96px' }}>
       {mainBgImg}
       <article className="ph4">
-        <header className="flex">
-          <h1 className="mr4 f2 lh-copy avenir ttc black-70">{props.greenspace.name}</h1>
-          <p style={{ paddingTop: '27px' }} className="mr4 f5 lh-copy avenir i b black-70">
+        <header className="flex justify-between">
+          <h1 className="mr3 f2 lh-copy avenir ttc black-70">{props.greenspace.name}</h1>
+          <p style={{ paddingTop: '20px' }} className="mr4 f4 lh-copy avenir i b black-70">
             {props.greenspace.address}
           </p>
-          {seekingFarmer}
+          <div className="mr4">{seekingFarmer}</div>
+          <Link className="no-underline link dim" to={`/user/${landOwner.id}`}>
+            <div className="flex">
+              <p className="mr3 f5 tr lh-title avenir ttc i b black-70" style={{ paddingTop: '12px' }}>
+                {`${landOwner.userName}'s`}
+                <br />
+                Greenspace
+              </p>
+              <div
+                className="mt3 br-100 bg-center cover"
+                style={{
+                  backgroundImage: `url(/public/images/profile_images/${landOwner.profileImage})`,
+                  height: '54px',
+                  width: '54px'
+                }}
+              />
+            </div>
+          </Link>
         </header>
         <div className="ph6">
           <p className="mt0 f3 lh-copy baskerville black-70">{props.greenspace.description}</p>
