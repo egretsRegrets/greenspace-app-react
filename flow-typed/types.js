@@ -41,6 +41,7 @@ export type User = {
   id: string,
   landOwner: boolean,
   farmer: boolean,
+  userName: string,
   name: string,
   bio: string,
   profileImage: string,
