@@ -2,6 +2,10 @@
 
 import React from 'react';
 
-const UserDetail = (props: { user: User }) => <h1>`User Detail Component for ${props.user.name}`</h1>;
+const UserDetail = (props: { user: User }) => (
+  <section style={{ paddingTop: '96px' }}>
+    <h1>{`User Detail Component for ${props.user.name}`}</h1>
+  </section>
+);
 
 export default UserDetail;
