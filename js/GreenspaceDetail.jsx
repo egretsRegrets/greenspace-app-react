@@ -89,7 +89,7 @@ const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
           <p className="mt0 f3 lh-copy baskerville black-70">{props.greenspace.description}</p>
         </div>
 
-        <div>{farmers.map((farmer: FarmerCard) => <FarmerCard farmer={farmer} />)}</div>
+        <div>{farmers.map((farmer: FarmerBrief) => <FarmerCard key={farmer.id} {...farmer} />)}</div>
       </article>
       <code>{JSON.stringify(props.greenspace)}</code>
     </section>
