@@ -55,7 +55,7 @@ export type User = {
   desiredPlotSize?: string
 };
 
-export type FarmerCard = {
+export type FarmerBrief = {
   userName: string,
   id: string,
   profileImage: string,
