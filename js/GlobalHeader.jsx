@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { connect, MapStateToProps } from 'react-redux';
+import { connect } from 'react-redux';
+import type { MapStateToProps } from 'react-redux';
 import preload from '../data.json';
 
 const GlobalHeader = (props: { selectedUser: User }) => (
