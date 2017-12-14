@@ -55,6 +55,15 @@ export type User = {
   desiredPlotSize?: string
 };
 
+export type FarmerCard = {
+  userName: string,
+  id: string,
+  profileImage: string,
+  community: string,
+  experience: farmingExperienceLevel,
+  skills: Array<farmingSkills>
+};
+
 declare type ActionType = 'SET_TEST_PHRASE';
 
 declare type ActionT<A: ActionType, P> = {|
