@@ -7,7 +7,7 @@ import type { MapStateToProps } from 'react-redux';
 import preload from '../data.json';
 
 const GlobalHeader = (props: { selectedUser: User }) => (
-  <header className="fixed w-100 flex items-center h3 pa4 ba bw4 bg-green green">
+  <header className="fixed z-999 w-100 flex items-center h3 pa4 ba bw4 bg-green green">
     <nav className="w-50 flex items-center h3">
       <Link className="mr3 f2 white avenir no-underline b" to="/">
         Greenspace
