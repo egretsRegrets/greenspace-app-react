@@ -19,6 +19,7 @@ const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
         {
           userName: user.userName,
           id: user.id,
+          bio: user.bio,
           profileImage: user.profileImage,
           community: user.community,
           experience: user.farmingExperienceLevel,
