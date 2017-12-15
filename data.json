@@ -358,7 +358,7 @@
         "Velit non id nulla adipisicing cupidatat nisi voluptate laboris occaecat sit id fugiat. Proident ullamco est dolor deserunt reprehenderit labore tempor velit id. Eiusmod tempor ipsum esse eiusmod. Dolor aute irure nulla laborum adipisicing ex incididunt eiusmod cupidatat. Ut consectetur voluptate enim officia nostrud nostrud irure amet. Pariatur reprehenderit aliquip ut culpa occaecat aute.\r\n",
       "farmingPropertyIDs": ["5a29fef94a6ca9b3c4ee8ee2"],
       "farmingExperienceLevel": "Novice",
-      "farmingSkills": ["Home Gardening", "Farming Education", "Sustainability"],
+      "farmingSkills": ["Home Gardening"],
       "desiredPlotSize": "desired plot size here"
     },
     {
@@ -390,7 +390,7 @@
         "Sunt tempor voluptate fugiat mollit. Veniam in et proident ea sit quis veniam duis exercitation. Labore dolor culpa exercitation magna magna aute enim Lorem id voluptate excepteur cillum eu. Ipsum officia reprehenderit aliquip minim. Irure duis ipsum duis tempor ut eu ut.\r\n",
       "farmingPropertyIDs": ["5a29fef933727c388db94c19"],
       "farmingExperienceLevel": "Expert",
-      "farmingSkills": ["Fruits", "Farmers Market", "Home Gardening"],
+      "farmingSkills": ["Fruits", "Farmers Market", "Home Gardening", "Farming Education"],
       "desiredPlotSize": "desired plot size here"
     },
     {
@@ -406,7 +406,6 @@
         "Laborum irure incididunt mollit anim reprehenderit duis. Anim pariatur nulla sint nulla minim non. Fugiat commodo minim tempor esse aliqua voluptate magna.\r\n",
       "farmingPropertyIDs": ["5a29fef933727c388db94c19"],
       "farmingExperienceLevel": "Novice",
-      "farmingSkills": ["Farming Education", "Vegetables", "Fruits"],
       "desiredPlotSize": "desired plot size here"
     }
   ]
