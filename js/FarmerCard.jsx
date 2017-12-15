@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const FarmerCard = (props: FarmerBrief) => (
-  <div className="w-25 pb4 ba b--black-10 br3 tc">
+  <div className="pb4 ba b--black-10 br3 tc" style={{ width: '23%', marginRight: '2%' }}>
     <header className="w-100 relative">
       <div className="w-100 absolute top-0 br3 br--top bg-near-white z-0" style={{ height: '90px' }} />
       <div
