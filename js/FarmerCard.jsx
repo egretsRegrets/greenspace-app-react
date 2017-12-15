@@ -24,19 +24,34 @@ const FarmerCard = (props: FarmerBrief) => {
       skillCol1 = skillCol1.concat(props.skills);
     }
   }
+
+  let shortBio;
+  if (!props.skills) {
+    // If we don't have skills we'll provide the bio instead but we just want an abstract,
+    // so we take the first 101 chars, cut off the last - to get rid of any cut off words,
+    shortBio = props.bio
+      .substr(0, 101)
+      .split(' ')
+      .slice(0, -1)
+      .join(' ');
+    // And if a period is the last character we want to delete it, because we're going to have an ellipsis
+    // at the end of our string variable.
+    if (shortBio.lastIndexOf('.') === shortBio.length - 1) {
+      shortBio = shortBio.substr(0, shortBio.length - 1);
+    }
+  }
+
   const skillList = (
-    <div className="w-100 mt3 ph3 bt b--black-10 ">
-      <h4 className="mb0 pl3 tl f4 ttc avenir black-70">skills</h4>
-      <hr className="mw4 ml3 mt1 mb0 bb bw1 b--black-05 tl" />
-      <div className="flex justify-around">
-        <ul className="mt2 pl1">
+    <div>
+      <div className="flex justify-between ph2">
+        <ul className="mt3 pl0 list">
           {skillCol1.map(skill => (
             <li key={skill} className="tl f7 lh-copy ttc helvetica b dark-green">
               {skill}
             </li>
           ))}
         </ul>
-        <ul className="mt2 pl1">
+        <ul className="mt3 pl0 list">
           {skillCol2.map(skill => (
             <li key={skill} className="tl f7 lh-copy ttc helvetica b dark-green">
               {skill}
@@ -46,9 +61,14 @@ const FarmerCard = (props: FarmerBrief) => {
       </div>
     </div>
   );
+  const bio = (
+    <div className="ph2 pt3">
+      <p className="mt0 tl lh-copy f6 avenir">{shortBio}...</p>
+    </div>
+  );
 
   return (
-    <div className="pb3 ba b--black-10 br3 tc" style={{ width: '23%', marginRight: '2%' }}>
+    <div className="pb3 ba b--black-05 br3 grow shadow-5 tc" style={{ width: '23%', marginRight: '2%' }}>
       <header className="w-100 mb3 relative">
         <div className="w-100 absolute top-0 br3 br--top bg-near-white z-0" style={{ height: '90px' }} />
         <div
@@ -69,7 +89,11 @@ const FarmerCard = (props: FarmerBrief) => {
         View Farmer
       </Link>
 
-      {props.skills ? skillList : null}
+      <div className="w-100 mt3 ph3 bt b--black-10 ">
+        <h4 className="mb0 mt3 pl2 tl f4 ttc avenir black-70">{props.skills ? 'skills' : 'about'}</h4>
+        <hr className="mw4 ml2 mt1 mb0 bb bw1 b--black-05 tl" />
+        {props.skills ? skillList : bio}
+      </div>
     </div>
   );
 };
