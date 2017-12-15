@@ -58,6 +58,7 @@ export type User = {
 export type FarmerBrief = {
   userName: string,
   id: string,
+  bio: string,
   profileImage: string,
   community: string,
   experience: farmingExperienceLevel,
