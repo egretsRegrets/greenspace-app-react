@@ -89,7 +89,12 @@ const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
           <p className="mt0 f3 lh-copy baskerville black-70">{props.greenspace.description}</p>
         </div>
 
-        <div>{farmers.map((farmer: FarmerBrief) => <FarmerCard key={farmer.id} {...farmer} />)}</div>
+        <div className="pa5">
+          <h1 className="mr3 f2 lh-title avenir black-70">The Farmers</h1>
+          <div className="flex flex-wrap justify-start">
+            {farmers.map((farmer: FarmerBrief) => <FarmerCard key={farmer.id} {...farmer} />)}
+          </div>
+        </div>
       </article>
       <code>{JSON.stringify(props.greenspace)}</code>
     </section>
