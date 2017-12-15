@@ -61,7 +61,7 @@ export type FarmerBrief = {
   profileImage: string,
   community: string,
   experience: farmingExperienceLevel,
-  skills: Array<farmingSkills>
+  skills?: Array<farmingSkills>
 };
 
 declare type ActionType = 'SET_TEST_PHRASE';
