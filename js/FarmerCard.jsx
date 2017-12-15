@@ -4,16 +4,49 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const FarmerCard = (props: FarmerBrief) => {
-  let skillList1 = [];
-  let skillList2 = [];
+  let skillCol1 = [];
+  let skillCol2 = [];
   if (props.skills) {
     if (props.skills.length > 1) {
-      skillList1 = skillList1.concat(props.skills.slice(0, props.skills.length / 2 + 1));
-      skillList2 = skillList2.concat(props.skills.slice(props.skills.length / 2 + 1));
+      // skill distribution to columns, check if length is even
+      if (props.skills.length % 2 === 0) {
+        skillCol1 = skillCol1.concat(props.skills.slice(0, props.skills.length / 2));
+        // $FlowFixMe
+        skillCol2 = skillCol2.concat(props.skills.slice(props.skills.length / 2));
+      } else {
+        // if odd we want the column with the highest number of items to be skillCol1
+        // $FlowFixMe
+        skillCol1 = skillCol1.concat(props.skills.slice(0, Math.floor(props.skills.length / 2) + 1));
+        // $FlowFixMe
+        skillCol2 = skillCol2.concat(props.skills.slice(Math.floor(props.skills.length / 2) + 1));
+      }
     } else {
-      skillList1 = skillList1.concat(props.skills);
+      skillCol1 = skillCol1.concat(props.skills);
     }
   }
+  const skillList = (
+    <div className="w-100 mt3 ph3 bt b--black-10 ">
+      <h4 className="mb0 pl3 tl f4 ttc avenir black-70">skills</h4>
+      <hr className="mw4 ml3 mt1 mb0 bb bw1 b--black-05 tl" />
+      <div className="flex justify-around">
+        <ul className="mt2 pl1">
+          {skillCol1.map(skill => (
+            <li key={skill} className="tl f7 lh-copy ttc helvetica b dark-green">
+              {skill}
+            </li>
+          ))}
+        </ul>
+        <ul className="mt2 pl1">
+          {skillCol2.map(skill => (
+            <li key={skill} className="tl f7 lh-copy ttc helvetica b dark-green">
+              {skill}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+
   return (
     <div className="pb3 ba b--black-10 br3 tc" style={{ width: '23%', marginRight: '2%' }}>
       <header className="w-100 mb3 relative">
@@ -36,26 +69,7 @@ const FarmerCard = (props: FarmerBrief) => {
         View Farmer
       </Link>
 
-      <div className="w-100 mt3 ph3 bt b--black-10 ">
-        <h4 className="mb0 pl3 tl f4 ttc avenir black-70">skills</h4>
-        <hr className="mw4 ml3 mt1 mb0 bb bw1 b--black-05 tl" />
-        <div className="flex justify-around">
-          <ul className="mt2 pl1">
-            {skillList1.map(skill => (
-              <li key={skill} className="tl f6 lh-copy ttc helvetica b dark-green">
-                {skill}
-              </li>
-            ))}
-          </ul>
-          <ul className="mt2 pl1">
-            {skillList2.map(skill => (
-              <li key={skill} className="tl f6 lh-copy ttc helvetica b dark-green">
-                {skill}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+      {props.skills ? skillList : null}
     </div>
   );
 };
