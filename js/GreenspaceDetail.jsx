@@ -6,6 +6,49 @@ import preload from '../data.json';
 import FarmerCard from './FarmerCard';
 
 const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
+  let farmersScrollTarget;
+
+  const scrollToFarmers = event => {
+    if (farmersScrollTarget !== null) {
+      event.preventDefault();
+      const startPosition = window.pageYOffset;
+      const startTime = new Date().getTime();
+      // $FlowFixMe
+      const documentHeight = document.body.scrollHeight;
+      const windowHeight = window.innerHeight;
+      const destinationOffset = farmersScrollTarget.offsetTop;
+      let destinationScroll;
+      if (documentHeight - destinationOffset < windowHeight) {
+        destinationScroll = documentHeight - windowHeight;
+      } else {
+        destinationScroll = destinationOffset;
+      }
+
+      // if we don't have access to requestAnimationFrame then we just scroll
+      if ('requestAnimationFrame' in window === false) {
+        return window.scrollTo(0, farmersScrollTarget.offsetTop);
+      }
+      const scroll = () => {
+        const now = new Date().getTime();
+        const time = Math.min(1, (now - startTime) / 500);
+        const easing = baseTime => {
+          let t = baseTime;
+          t -= 1;
+          return t * t * t + 1;
+        };
+        window.scroll(0, Math.ceil(easing(time) * (destinationScroll - startPosition) + startPosition));
+
+        if (window.pageYOffset === destinationScroll) {
+          return;
+        }
+
+        requestAnimationFrame(scroll);
+      };
+
+      return scroll();
+    }
+    return null;
+  };
   const greenspaceOwner: User = preload.users.find((user: User) => user.id === props.greenspace.landownerID);
   const farmers = preload.users
     .filter((user: User) => user.farmer)
@@ -28,7 +71,12 @@ const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
       )
     );
   const farmersSection = (
-    <div className="pa5">
+    <div
+      ref={target => {
+        farmersScrollTarget = target;
+      }}
+      className="pa5"
+    >
       <h1 className="mr3 f2 lh-title avenir black-70">The Farmers</h1>
       <div className="flex flex-wrap justify-start">
         {farmers.map((farmer: FarmerBrief) => <FarmerCard key={farmer.id} {...farmer} />)}
@@ -57,7 +105,7 @@ const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
     );
   } else {
     seekingFarmer = (
-      <Link to="/" className="dib mv4 ph3 pv2 ba bw1 br-pill dim link no-underline green">
+      <Link to="/" onClick={scrollToFarmers} className="dib mv4 ph3 pv2 ba bw1 br-pill dim link no-underline green">
         See The Farmers
       </Link>
     );
