@@ -118,7 +118,7 @@
       "description":
         "Mollit culpa cupidatat excepteur nostrud incididunt dolore occaecat officia pariatur laboris cupidatat. Anim id nostrud laboris amet occaecat pariatur. Sit excepteur occaecat cupidatat cillum aliqua eiusmod dolore. Amet nostrud sit aute eiusmod ad aliquip adipisicing sunt nulla laborum. Aute ex voluptate aliquip nostrud.",
       "tags": ["micro plot", "backyard"],
-      "farmerDesired": false,
+      "farmerDesired": true,
       "farmerParticipation": "co-Farmer",
       "landownerID": "5a3074b71cd1395026284cb0"
     },
@@ -139,7 +139,7 @@
       "description":
         "Commodo qui mollit commodo labore nostrud sunt ad quis culpa esse. Minim veniam culpa elit laborum. Non ullamco magna consequat et magna ut ad laborum magna est.",
       "tags": ["large plot", "backyard"],
-      "farmerDesired": false,
+      "farmerDesired": true,
       "farmerParticipation": "helping Hand",
       "landownerID": "5a3074b7c9bcb26a5ad77320"
     },
