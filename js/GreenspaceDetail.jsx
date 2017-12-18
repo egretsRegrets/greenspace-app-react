@@ -131,7 +131,7 @@ class GreenspaceDetail extends Component {
     );
 
     return (
-      <section style={{ paddingTop: '96px' }}>
+      <section className="mb5" style={{ paddingTop: '96px' }}>
         {mainBgImg}
 
         <article className="ph4">
@@ -160,7 +160,7 @@ class GreenspaceDetail extends Component {
             </Link>
           </header>
 
-          <div className="pt4 ph6">
+          <div className="pt5 ph6">
             <div>
               <ul className="pl0 list">
                 {this.props.greenspace.tags.map(tag => (
@@ -171,11 +171,20 @@ class GreenspaceDetail extends Component {
               </ul>
               <hr className="mw6 ml0 mt1 mb3 bb bw1 b--black-10 tl" />
             </div>
-            <p className="mt0 f3 lh-copy baskerville black-70">{this.props.greenspace.description}</p>
+            <p className="mv0 f3 lh-copy baskerville black-70">{this.props.greenspace.description}</p>
           </div>
 
-          {farmers.length ? farmersSection : null}
+          <div className="ph4 w-100 flex ml2 mt6 flex-wrap justify-start">
+            {this.props.greenspace.images
+              ? this.props.greenspace.images.map(image => (
+                  <div className="h5 w-25 pr3 mb3 grow" key={image}>
+                    <div className="h5 bg-center cover" style={{ backgroundImage: `url(/public/images/${image})` }} />
+                  </div>
+                ))
+              : null}
+          </div>
         </article>
+        {farmers.length ? farmersSection : null}
       </section>
     );
   }
