@@ -13,8 +13,11 @@ class GreenspaceDetail extends Component {
       this.scrollToFarmers();
     }
   }
+
   props: { greenspace: Greenspace, history: RouterHistory };
+
   farmersScrollTarget: HTMLDivElement;
+
   scrollToFarmers = (event: SyntheticEvent<*> | null = null) => {
     if (this.farmersScrollTarget !== undefined) {
       if (event !== null) {
@@ -157,14 +160,22 @@ class GreenspaceDetail extends Component {
             </Link>
           </header>
 
-          <div className="ph6">
-            {/* <div>{props.greenspace.tags.map(tag => <li key={tag}>{tag}</li>)}</div> */}
+          <div className="pt4 ph6">
+            <div>
+              <ul className="pl0 list">
+                {this.props.greenspace.tags.map(tag => (
+                  <li className="mr3 dib lh-copy f5 ttc b i green avenir" key={tag}>
+                    {tag}
+                  </li>
+                ))}
+              </ul>
+              <hr className="mw6 ml0 mt1 mb3 bb bw1 b--black-10 tl" />
+            </div>
             <p className="mt0 f3 lh-copy baskerville black-70">{this.props.greenspace.description}</p>
           </div>
 
           {farmers.length ? farmersSection : null}
         </article>
-        <pre>{JSON.stringify(this.props.history.location)}</pre>
       </section>
     );
   }
