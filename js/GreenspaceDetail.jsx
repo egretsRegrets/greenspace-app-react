@@ -17,6 +17,7 @@ class GreenspaceDetail extends Component {
   props: { greenspace: Greenspace, history: RouterHistory };
 
   farmersScrollTarget: HTMLDivElement;
+  becomeFarmerScrollTarget: HTMLDivElement;
 
   scrollToFarmers = (event: SyntheticEvent<*> | null = null) => {
     if (this.farmersScrollTarget !== undefined) {
@@ -42,7 +43,7 @@ class GreenspaceDetail extends Component {
       }
       const scroll = () => {
         const now = new Date().getTime();
-        const time = Math.min(1, (now - startTime) / 500);
+        const time = Math.min(1, (now - startTime) / 700);
         const easing = baseTime => {
           let t = baseTime;
           t -= 1;
@@ -84,13 +85,12 @@ class GreenspaceDetail extends Component {
       );
     } else {
       seekingFarmer = (
-        <Link
-          to="/"
+        <button
           onClick={this.scrollToFarmers}
-          className="dib mv4 ph3 pv2 ba bw1 br-pill dim link no-underline green"
+          className="dib mv4 ph3 pv2 ba b--green bw1 br-pill f6 dim pointer link no-underline avenir green"
         >
           See The Farmers
-        </Link>
+        </button>
       );
     }
     const greenspaceOwner: User = preload.users.find((user: User) => user.id === this.props.greenspace.landownerID);
@@ -114,6 +114,7 @@ class GreenspaceDetail extends Component {
           }
         )
       );
+
     const farmersSection = (
       <div
         // $FlowFixMe
@@ -126,6 +127,32 @@ class GreenspaceDetail extends Component {
         <h1 className="mr3 f2 lh-title avenir black-70">The Farmers</h1>
         <div className="flex flex-wrap justify-start">
           {farmers.map((farmer: FarmerBrief) => <FarmerCard key={farmer.id} {...farmer} />)}
+        </div>
+      </div>
+    );
+
+    const becomeFarmerSection = (
+      <div
+        // $FlowFixMe
+        ref={(target: HTMLDivElement) => {
+          this.becomeFarmerScrollTarget = target;
+        }}
+        className="mt5 bg-near-white"
+      >
+        <div className="dt-ns w-100 ph5 pv4">
+          <div className="dtc-ns w-50 v-mid">
+            <h3 className="f3 lh-title avenir ttc light-red">{this.props.greenspace.name} needs a farmer.</h3>
+            <p className="lh-copy f5 avenir">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ac sapien odio. Quisque ut risus sed risus
+              pulvinar pharetra vitae venenatis sem. Vestibulum sit amet elementum erat. Sed faucibus, arcu vitae
+              egestas rutrum, erat ante gravida massa, sit amet hendrerit est lacus at leo.
+            </p>
+          </div>
+          <div className="dtc-ns w-50 v-mid tc">
+            <Link to="/" className="w-75 pv3 dib f5 avenir bg-light-red br2 white tc link dim no-underline">
+              Become a Farmer
+            </Link>
+          </div>
         </div>
       </div>
     );
@@ -184,6 +211,8 @@ class GreenspaceDetail extends Component {
               : null}
           </div>
         </article>
+
+        {this.props.greenspace.farmerDesired ? becomeFarmerSection : null}
         {farmers.length ? farmersSection : null}
       </section>
     );
