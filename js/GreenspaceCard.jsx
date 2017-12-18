@@ -15,7 +15,7 @@ const GreenspaceCard = (props: Greenspace) => {
     );
   } else {
     seekingFarmer = (
-      <Link to="/" className="dib ph2 pv2 ba bw1 br-pill dim link no-underline green">
+      <Link to={`/greenspace/${props.id}#farmers`} className="dib ph2 pv2 ba bw1 br-pill dim link no-underline green">
         See The Farmers
       </Link>
     );
