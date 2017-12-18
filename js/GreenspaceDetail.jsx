@@ -2,10 +2,11 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import type { RouterHistory } from 'react-router-dom';
 import preload from '../data.json';
 import FarmerCard from './FarmerCard';
 
-const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
+const GreenspaceDetail = (props: { greenspace: Greenspace, history: RouterHistory }) => {
   let farmersScrollTarget;
 
   const scrollToFarmers = event => {
@@ -76,6 +77,7 @@ const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
         farmersScrollTarget = target;
       }}
       className="pa5"
+      id="farmersSection"
     >
       <h1 className="mr3 f2 lh-title avenir black-70">The Farmers</h1>
       <div className="flex flex-wrap justify-start">
@@ -142,12 +144,13 @@ const GreenspaceDetail = (props: { greenspace: Greenspace }) => {
         </header>
 
         <div className="ph6">
+          {/* <div>{props.greenspace.tags.map(tag => <li key={tag}>{tag}</li>)}</div> */}
           <p className="mt0 f3 lh-copy baskerville black-70">{props.greenspace.description}</p>
         </div>
 
         {farmers.length ? farmersSection : null}
       </article>
-      <code>{JSON.stringify(props.greenspace)}</code>
+      <pre>{JSON.stringify(props.history.location)}</pre>
     </section>
   );
 };

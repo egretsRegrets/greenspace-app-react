@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import type { Match } from 'react-router-dom';
+import type { Match, RouterHistory } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import preload from '../data.json';
@@ -23,11 +23,11 @@ const App = () => (
         <Route path="/greenspaces" component={props => <Greenspaces greenspaces={preload.greenspaces} {...props} />} />
         <Route
           path="/greenspace/:id"
-          component={(props: { match: Match }) => {
+          component={(props: { match: Match, history: RouterHistory }) => {
             const selectedGreenspace = preload.greenspaces.find(
               (greenspace: Greenspace) => greenspace.id === props.match.params.id
             );
-            return <GreenspaceDetail greenspace={selectedGreenspace} {...props} />;
+            return <GreenspaceDetail greenspace={selectedGreenspace} history={props.history} {...props} />;
           }}
         />
         <Route
