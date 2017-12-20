@@ -5,8 +5,7 @@ import { Link } from 'react-router-dom';
 
 const GreenspaceCard = (props: Greenspace) => {
   let seekingFarmer;
-  let spaceImages;
-  let spaceMainImage;
+  // let gsBackgroundImg;
   if (props.farmerDesired) {
     seekingFarmer = (
       <Link
@@ -23,22 +22,15 @@ const GreenspaceCard = (props: Greenspace) => {
       </Link>
     );
   }
-  if (props.images) {
-    spaceImages = props.images;
-    spaceMainImage = (
-      <img
-        src={`/public/images/${spaceImages[0]}`}
-        alt={`${props.name} greenspace thumbnail`}
-        className="br3 br--top"
-      />
-    );
-  } else {
-    spaceMainImage = <p>No main image</p>;
-  }
+
+  // if
   return (
     <div className="w-25 mb3 pa3">
       <section className="h-100 bg-near-white br3 shadow-5">
-        <div className="h4 overflow-hidden">{spaceMainImage}</div>
+        <div
+          className="h4 w-100 bg-center cover bg-dark-green br3 br--top"
+          style={props.mainImage ? { backgroundImage: `url(/public/images/${props.mainImage})` } : null}
+        />
         <Link
           to={`/greenspace/${props.id}`}
           className="db w-75 center mt4 mb3 pv2 br-pill bg-green link dim tc f4 avenir b white no-underline"
