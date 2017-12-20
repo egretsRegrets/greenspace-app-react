@@ -9,7 +9,10 @@ const GreenspaceCard = (props: Greenspace) => {
   let spaceMainImage;
   if (props.farmerDesired) {
     seekingFarmer = (
-      <Link to="/" className="dib ph2 pv2 ba bw1 br-pill dim link no-underline light-red">
+      <Link
+        to={`/greenspace/${props.id}#become-a-farmer`}
+        className="dib ph2 pv2 ba bw1 br-pill dim link no-underline light-red"
+      >
         Seeking Farmer
       </Link>
     );
