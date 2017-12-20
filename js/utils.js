@@ -1,6 +1,6 @@
 // @flow
 
-const cubicOut = (time: number) => {
+export const cubicOut = (time: number) => {
   let t = time;
   t -= 1;
   return t * t * t + 1;
@@ -9,10 +9,10 @@ const cubicOut = (time: number) => {
 export const easings = { cubicOut };
 
 export const scrollToElem = (
-  event: SyntheticEvent<*> | null = null,
   targetElem: HTMLElement | null = null,
   duration: number = 300,
-  easingFunction: Function = (time: number) => time
+  easingFunction: Function = (time: number) => time,
+  event: SyntheticEvent<*> | null = null
 ) => {
   if (targetElem !== null) {
     if (event !== null) {

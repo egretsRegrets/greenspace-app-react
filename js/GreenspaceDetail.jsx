@@ -5,12 +5,19 @@ import { Link } from 'react-router-dom';
 import type { RouterHistory } from 'react-router-dom';
 import preload from '../data.json';
 import FarmerCard from './FarmerCard';
+import { scrollToElem, easings } from './utils';
 
 // $FlowFixMe
 class GreenspaceDetail extends Component {
+  constructor() {
+    super();
+
+    this.scrollToFarmers = (event: SyntheticEvent<*>) =>
+      scrollToElem(this.farmersScrollTarget, 700, easings.cubicOut, event);
+  }
   componentDidMount() {
     if (this.props.history.location.hash === '#farmers') {
-      this.scrollToFarmers();
+      scrollToElem(this.farmersScrollTarget, 700, easings.cubicOut);
     }
   }
 
@@ -18,50 +25,8 @@ class GreenspaceDetail extends Component {
 
   farmersScrollTarget: HTMLDivElement;
   becomeFarmerScrollTarget: HTMLDivElement;
-
-  scrollToFarmers = (event: SyntheticEvent<*> | null = null) => {
-    if (this.farmersScrollTarget !== undefined) {
-      if (event !== null) {
-        event.preventDefault();
-      }
-      const startPosition = window.pageYOffset;
-      const startTime = new Date().getTime();
-      // $FlowFixMe
-      const documentHeight = document.body.scrollHeight;
-      const windowHeight = window.innerHeight;
-      const destinationOffset = this.farmersScrollTarget.offsetTop;
-      let destinationScroll;
-      if (documentHeight - destinationOffset < windowHeight) {
-        destinationScroll = documentHeight - windowHeight;
-      } else {
-        destinationScroll = destinationOffset;
-      }
-
-      // if we don't have access to requestAnimationFrame then we just scroll
-      if ('requestAnimationFrame' in window === false) {
-        return window.scrollTo(0, this.farmersScrollTarget.offsetTop);
-      }
-      const scroll = () => {
-        const now = new Date().getTime();
-        const time = Math.min(1, (now - startTime) / 700);
-        const easing = baseTime => {
-          let t = baseTime;
-          t -= 1;
-          return t * t * t + 1;
-        };
-        window.scroll(0, Math.ceil(easing(time) * (destinationScroll - startPosition) + startPosition));
-
-        if (window.pageYOffset === destinationScroll) {
-          return;
-        }
-
-        requestAnimationFrame(scroll);
-      };
-
-      return scroll();
-    }
-    return null;
-  };
+  scrollToFarmers: Function;
+  scrollToBecome: Function;
 
   render() {
     let mainBgImg;
