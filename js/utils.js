@@ -12,6 +12,7 @@ export const scrollToElem = (
   targetElem: HTMLElement | null = null,
   duration: number = 300,
   easingFunction: Function = (time: number) => time,
+  verticalCompensation: number = 0,
   event: SyntheticEvent<*> | null = null
 ) => {
   if (targetElem !== null) {
@@ -23,7 +24,7 @@ export const scrollToElem = (
     // $FlowFixMe
     const documentHeight = document.body.scrollHeight;
     const windowHeight = window.innerHeight;
-    const destinationOffset = targetElem.offsetTop;
+    const destinationOffset = targetElem.offsetTop + verticalCompensation;
     let destinationScroll;
     if (documentHeight - destinationOffset < windowHeight) {
       destinationScroll = documentHeight - windowHeight;

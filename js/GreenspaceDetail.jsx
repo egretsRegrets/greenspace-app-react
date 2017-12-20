@@ -13,7 +13,10 @@ class GreenspaceDetail extends Component {
     super();
 
     this.scrollToFarmers = (event: SyntheticEvent<*>) =>
-      scrollToElem(this.farmersScrollTarget, 700, easings.cubicOut, event);
+      scrollToElem(this.farmersScrollTarget, 700, easings.cubicOut, 0, event);
+
+    this.scrollToBecome = (event: SyntheticEvent<*>) =>
+      scrollToElem(this.becomeScrollTarget, 700, easings.cubicOut, -110, event);
   }
   componentDidMount() {
     if (this.props.history.location.hash === '#farmers') {
@@ -24,7 +27,7 @@ class GreenspaceDetail extends Component {
   props: { greenspace: Greenspace, history: RouterHistory };
 
   farmersScrollTarget: HTMLDivElement;
-  becomeFarmerScrollTarget: HTMLDivElement;
+  becomeScrollTarget: HTMLDivElement;
   scrollToFarmers: Function;
   scrollToBecome: Function;
 
@@ -44,9 +47,12 @@ class GreenspaceDetail extends Component {
     }
     if (this.props.greenspace.farmerDesired) {
       seekingFarmer = (
-        <Link to="/" className="dib mv4 ph3 pv2 ba bw1 br-pill dim link no-underline light-red">
+        <button
+          onClick={this.scrollToBecome}
+          className="dib mv4 ph3 pv2 ba b--light-red bw1 br-pill f6 dim pointer link no-underline light-red"
+        >
           Become a Farmer
-        </Link>
+        </button>
       );
     } else {
       seekingFarmer = (
@@ -100,7 +106,7 @@ class GreenspaceDetail extends Component {
       <div
         // $FlowFixMe
         ref={(target: HTMLDivElement) => {
-          this.becomeFarmerScrollTarget = target;
+          this.becomeScrollTarget = target;
         }}
         className="mt5 bg-near-white"
       >
