@@ -12,15 +12,17 @@ class GreenspaceDetail extends Component {
   constructor() {
     super();
 
-    this.scrollToFarmers = (event: SyntheticEvent<*>) =>
-      scrollToElem(this.farmersScrollTarget, 700, easings.cubicOut, 0, event);
+    this.scrollToFarmers = (event: SyntheticEvent<*> | null = null) =>
+      scrollToElem(this.farmersScrollTarget, 700, easings.cubicOut, -20, event);
 
-    this.scrollToBecome = (event: SyntheticEvent<*>) =>
+    this.scrollToBecome = (event: SyntheticEvent<*> | null = null) =>
       scrollToElem(this.becomeScrollTarget, 700, easings.cubicOut, -110, event);
   }
   componentDidMount() {
     if (this.props.history.location.hash === '#farmers') {
-      scrollToElem(this.farmersScrollTarget, 700, easings.cubicOut);
+      this.scrollToFarmers();
+    } else if (this.props.history.location.hash === '#become-a-farmer') {
+      this.scrollToBecome();
     }
   }
 
