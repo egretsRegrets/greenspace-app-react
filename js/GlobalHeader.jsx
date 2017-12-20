@@ -12,7 +12,7 @@ const GlobalHeader = (props: { selectedUser: User }) => (
       <Link className="mr3 f2 white avenir no-underline b" to="/">
         Greenspace
       </Link>
-      <Link className="mr3 pt2 f4 white avenir no-underline b dim" to="/">
+      <Link className="mr3 pt2 f4 white avenir no-underline b dim" to="/farmers">
         Farmers
       </Link>
       <Link className="pt2 f4 white avenir no-underline b dim" to="/greenspaces">
