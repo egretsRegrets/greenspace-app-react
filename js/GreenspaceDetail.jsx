@@ -139,7 +139,7 @@ class GreenspaceDetail extends Component {
         }}
         className="mt5 bg-near-white"
       >
-        <div className="dt-ns w-100 ph5 pv4">
+        <div className="dt-ns w-100 ph5 pv5">
           <div className="dtc-ns w-50 v-mid">
             <h3 className="f3 lh-title avenir ttc light-red">{this.props.greenspace.name} needs a farmer.</h3>
             <p className="lh-copy f5 avenir">
