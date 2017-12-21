@@ -68,7 +68,10 @@ const FarmerCard = (props: FarmerBrief) => {
   );
 
   return (
-    <div className="pb3 ba b--black-05 br3 grow shadow-5 tc" style={{ width: '23%', marginRight: '2%' }}>
+    <div
+      className="pb3 ba b--black-05 br3 grow shadow-5 tc"
+      style={{ width: '23%', marginRight: '2%', marginBottom: '48px' }}
+    >
       <header className="w-100 mb3 relative">
         <div className="w-100 absolute top-0 br3 br--top bg-near-white z-0" style={{ height: '90px' }} />
         <div
