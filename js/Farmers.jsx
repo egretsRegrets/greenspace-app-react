@@ -13,7 +13,7 @@ class Farmers extends Component {
     };
   }
 
-  props: { farmers: Array<FarmerBrief>, pages: [], cardsPerPage: number };
+  props: { farmers: Array<FarmerBrief>, cardsPerPage: number };
 
   updatePage = (event: any) =>
     // $FlowFixMe
@@ -25,11 +25,13 @@ class Farmers extends Component {
 
     const pagination = (
       <div>
-        {this.props.pages.map(val => (
-          <button key={val} onClick={this.updatePage}>
-            {val}
-          </button>
-        ))}
+        {Array.from({ length: Math.ceil(this.props.farmers.length / this.props.cardsPerPage) }, (v, i) => i + 1).map(
+          val => (
+            <button key={val} onClick={this.updatePage}>
+              {val}
+            </button>
+          )
+        )}
       </div>
     );
 

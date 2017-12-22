@@ -56,12 +56,8 @@ const App = () => (
               )
             );
             const cardsPerPage = 8;
-            const pagesArr = [];
-            for (let i = 1; i <= Math.ceil(farmers.length / cardsPerPage); i += 1) {
-              pagesArr.push(i);
-            }
 
-            return <Farmers farmers={farmers} pages={pagesArr} cardsPerPage={cardsPerPage} {...props} />;
+            return <Farmers farmers={farmers} cardsPerPage={cardsPerPage} {...props} />;
           }}
         />
         <Route component={FourOhFour} />
