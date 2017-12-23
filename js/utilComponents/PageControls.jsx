@@ -51,11 +51,14 @@ export const NextPreviousBtns = (props: {
       </svg>
     </button>
   );
+  const pageOfPages = (
+    <h5 className="dib black avenir f5" style={{ lineHeight: '2.4' }}>{`${props.pageNumber} of ${totalPages}`}</h5>
+  );
   return (
     <div className="avenir v-btm">
       {props.pageNumber > 1 ? previousBtn : null}
       {props.pageNumber < totalPages ? nextBtn : null}
-      <h5 className="dib black avenir f5" style={{ lineHeight: '2.4' }}>{`${props.pageNumber} of ${totalPages}`}</h5>
+      {totalPages > 1 ? pageOfPages : null}
     </div>
   );
 };
