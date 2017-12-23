@@ -15,19 +15,20 @@ class Farmers extends Component {
     };
   }
 
-  props: { farmers: Array<FarmerBrief>, cardsPerPage: number };
+  props: { farmers: Array<FarmerBrief> };
 
   updatePage = (val: number) =>
     // $FlowFixMe
     this.setState({ pageNumber: parseInt(val, 10) });
 
   render() {
+    const cardsPerPage = 8;
     const cards = (
       <div className="flex flex-wrap justify-start pv4">
         {// $FlowFixMe
-        PaginationSlice(this.props.farmers, this.state.pageNumber, this.props.cardsPerPage).map(
-          (farmer: FarmerBrief) => <FarmerCard key={farmer.id} {...farmer} />
-        )}
+        PaginationSlice(this.props.farmers, this.state.pageNumber, cardsPerPage).map((farmer: FarmerBrief) => (
+          <FarmerCard key={farmer.id} {...farmer} />
+        ))}
       </div>
     );
 
@@ -39,7 +40,7 @@ class Farmers extends Component {
           // $FlowFixMe
           pageNumber={this.state.pageNumber}
           dataLength={this.props.farmers.length}
-          cardsPerPage={this.props.cardsPerPage}
+          cardsPerPage={cardsPerPage}
           clickHandler={this.updatePage}
         />
       </section>

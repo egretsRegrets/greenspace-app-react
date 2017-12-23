@@ -55,9 +55,7 @@ const App = () => (
                 }
               )
             );
-            const cardsPerPage = 4;
-
-            return <Farmers farmers={farmers} cardsPerPage={cardsPerPage} {...props} />;
+            return <Farmers farmers={farmers} {...props} />;
           }}
         />
         <Route component={FourOhFour} />
