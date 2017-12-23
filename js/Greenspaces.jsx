@@ -22,7 +22,7 @@ class Greenspaces extends Component {
     this.setState({ pageNumber: parseInt(val, 10) });
 
   render() {
-    const cardsPerPage = 4;
+    const cardsPerPage = 8;
     return (
       <div className="pv6 ph5">
         <section className="flex flex-wrap justify-between pv4">
