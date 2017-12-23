@@ -52,3 +52,6 @@ export const scrollToElem = (
   }
   return null;
 };
+
+export const PaginationSlice = (items: Array<Object>, pageNumber: number, cardsPerPage: number) =>
+  items.slice(pageNumber * cardsPerPage - (cardsPerPage - 1) - 1, pageNumber * cardsPerPage);

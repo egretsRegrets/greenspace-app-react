@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import FarmerCard from './FarmerCard';
 import PageBtns from './utilComponents/PageBtns';
+import { PaginationSlice } from './utils';
 
 // $FlowFixMe
 class Farmers extends Component {
@@ -21,21 +22,12 @@ class Farmers extends Component {
     this.setState({ pageNumber: parseInt(event.target.innerHTML, 10) });
 
   render() {
-    // $FlowFixMe
-    const thisPage = this.state.pageNumber;
-
     const cards = (
       <div className="flex flex-wrap justify-start pv4">
         {// $FlowFixMe
-        this.props.farmers
-          // $FlowFixMe
-          .slice(
-            // $FlowFixMe
-            this.state.pageNumber * this.props.cardsPerPage - (this.props.cardsPerPage - 1) - 1,
-            // $FlowFixMe
-            thisPage * this.props.cardsPerPage
-          )
-          .map((farmer: FarmerBrief) => <FarmerCard key={farmer.id} {...farmer} />)}
+        PaginationSlice(this.props.farmers, this.state.pageNumber, this.props.cardsPerPage).map(
+          (farmer: FarmerBrief) => <FarmerCard key={farmer.id} {...farmer} />
+        )}
       </div>
     );
 
