@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import FarmerCard from './FarmerCard';
+import PageBtns from './utilComponents/PageBtns';
 
 // $FlowFixMe
 class Farmers extends Component {
@@ -23,18 +24,6 @@ class Farmers extends Component {
     // $FlowFixMe
     const thisPage = this.state.pageNumber;
 
-    const pagination = (
-      <div>
-        {Array.from({ length: Math.ceil(this.props.farmers.length / this.props.cardsPerPage) }, (v, i) => i + 1).map(
-          val => (
-            <button key={val} onClick={this.updatePage}>
-              {val}
-            </button>
-          )
-        )}
-      </div>
-    );
-
     const cards = (
       <div className="flex flex-wrap justify-start pv4">
         {// $FlowFixMe
@@ -54,7 +43,11 @@ class Farmers extends Component {
       <section className="pv6 ph5">
         {/* delimit num per section by specific number, add margin to bottom of each section */}
         {cards}
-        {pagination}
+        <PageBtns
+          dataLength={this.props.farmers.length}
+          cardsPerPage={this.props.cardsPerPage}
+          clickHandler={this.updatePage}
+        />
       </section>
     );
   }
