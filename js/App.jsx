@@ -55,7 +55,7 @@ const App = () => (
                 }
               )
             );
-            const cardsPerPage = 8;
+            const cardsPerPage = 4;
 
             return <Farmers farmers={farmers} cardsPerPage={cardsPerPage} {...props} />;
           }}

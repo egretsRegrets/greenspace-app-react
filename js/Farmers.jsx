@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import FarmerCard from './FarmerCard';
-import PageBtns from './utilComponents/PageBtns';
+import { NextPreviousBtns } from './utilComponents/PageControls';
 import { PaginationSlice } from './utils';
 
 // $FlowFixMe
@@ -17,9 +17,9 @@ class Farmers extends Component {
 
   props: { farmers: Array<FarmerBrief>, cardsPerPage: number };
 
-  updatePage = (event: any) =>
+  updatePage = (val: number) =>
     // $FlowFixMe
-    this.setState({ pageNumber: parseInt(event.target.innerHTML, 10) });
+    this.setState({ pageNumber: parseInt(val, 10) });
 
   render() {
     const cards = (
@@ -35,7 +35,9 @@ class Farmers extends Component {
       <section className="pv6 ph5">
         {/* delimit num per section by specific number, add margin to bottom of each section */}
         {cards}
-        <PageBtns
+        <NextPreviousBtns
+          // $FlowFixMe
+          pageNumber={this.state.pageNumber}
           dataLength={this.props.farmers.length}
           cardsPerPage={this.props.cardsPerPage}
           clickHandler={this.updatePage}

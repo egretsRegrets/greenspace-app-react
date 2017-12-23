@@ -1,13 +1,16 @@
 // @flow
 
+// easings, more here as needed
 export const cubicOut = (time: number) => {
   let t = time;
   t -= 1;
   return t * t * t + 1;
 };
 
+// easings grouping
 export const easings = { cubicOut };
 
+// to dom element scrolling
 export const scrollToElem = (
   targetElem: HTMLElement | null = null,
   duration: number = 300,
@@ -53,5 +56,6 @@ export const scrollToElem = (
   return null;
 };
 
+// takes a per-page slice of paginated content
 export const PaginationSlice = (items: Array<Object>, pageNumber: number, cardsPerPage: number) =>
   items.slice(pageNumber * cardsPerPage - (cardsPerPage - 1) - 1, pageNumber * cardsPerPage);
