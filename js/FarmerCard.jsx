@@ -87,7 +87,7 @@ const FarmerCard = (props: FarmerBrief) => {
       <h5 className="mt2 mb3 f5 lh-title ttc avenir black-70">{`${props.experience} farmer`}</h5>
       <Link
         className="dib auto ph3 pv2 ba br-pill dark-green f7 avenir b no-underline link dim"
-        to={`/user/${props.id}`}
+        to={`/user/${props.id}/#farming`}
       >
         View Farmer
       </Link>

@@ -141,7 +141,7 @@ class GreenspaceDetail extends Component {
               {this.props.greenspace.address}
             </p>
             <div className="mr4">{seekingFarmer}</div>
-            <Link className="no-underline link dim" to={`/user/${greenspaceOwner.id}`}>
+            <Link className="no-underline link dim" to={`/user/${greenspaceOwner.id}/#greenspaces`}>
               <div className="flex">
                 <p className="mr3 f5 tr lh-title avenir ttc i b black-70" style={{ paddingTop: '12px' }}>
                   {`${greenspaceOwner.userName}'s`}
