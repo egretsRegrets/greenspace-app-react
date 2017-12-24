@@ -259,7 +259,7 @@
     {
       "id": "5a3074b7cb011adf479c33e6",
       "landOwner": true,
-      "farmer": false,
+      "farmer": true,
       "userName": "Dipika Gass",
       "name": "Dipika Gass",
       "profileImage": "LOProfileImg_8.jpeg",
@@ -268,7 +268,11 @@
       "bio":
         "Ex ipsum fugiat ut in excepteur reprehenderit. Proident excepteur nostrud culpa est laboris. Minim pariatur anim cillum adipisicing elit ex veniam tempor laborum esse exercitation mollit. Non ipsum eiusmod quis qui aliqua mollit consectetur commodo laborum laboris quis deserunt cillum magna.\r\n",
       "ownedPropertyIDs": ["5a29fef933727c388db94c19"],
-      "desiredLandOwnerParticipation": "hands-off"
+      "desiredLandOwnerParticipation": "hands-off",
+      "farmingPropertyIDs": ["5a29fef971210f7fc7701149"],
+      "farmingExperienceLevel": "Expert",
+      "farmingSkills": ["Home Gardening", "Herbs", "Vegetables"],
+      "desiredPlotSize": "desired plot size here"
     },
     {
       "id": "5a30a44bd4d7854084bedc73",
@@ -340,7 +344,7 @@
       "farmer": true,
       "userName": "ishild wolff",
       "name": "ishild wolff",
-      "profileImage": "FProfileImg_5.jpeg",
+      "profileImage": "profile_placeholder.png",
       "email": "occaecat@fakemail.com",
       "community": "173 Grand Avenue, Disautel, Montana, 3773",
       "bio":
