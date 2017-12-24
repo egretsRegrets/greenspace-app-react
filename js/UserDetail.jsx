@@ -4,6 +4,7 @@
 // use this.state.currentView to decide where selectedViewHR is displayed
 
 import React, { Component } from 'react';
+import type { RouterHistory } from 'react-router-dom';
 
 // $FlowFixMe
 class UserDetail extends Component {
@@ -14,9 +15,9 @@ class UserDetail extends Component {
   }
 
   componentWillMount() {
-    if (this.props.profileView) {
+    if (this.props.history.location.hash) {
       // $FlowFixMe
-      this.setState({ currentView: this.props.profileView });
+      this.setState({ currentView: this.props.history.location.hash.slice(1) });
     } else if (this.props.user.farmer && !this.props.user.landOwner) {
       // $FlowFixMe
       this.setState({ currentView: 'farming' });
@@ -30,9 +31,9 @@ class UserDetail extends Component {
     }
   }
 
-  props: { user: User, profileView: null | 'farming' | 'greenspaces' };
+  props: { user: User, history: RouterHistory };
 
-  changeProfileView = (event: SyntheticEvent<*>) =>
+  changeCurrentView = (event: SyntheticEvent<*>) =>
     // $FlowFixMe
     this.setState({ currentView: event.target.innerHTML.toLowerCase() });
 
@@ -65,7 +66,7 @@ class UserDetail extends Component {
     const selectedViewHR = <hr className="green mb0 mt2 bw2 bl-0-l bt-0-l" />;
     const farmerProfileSelect = (
       <div className="ph2">
-        <button onClick={this.changeProfileView} className="mh3 bn bg-white avenir pointer">
+        <button onClick={this.changeCurrentView} className="mh3 bn bg-white avenir pointer">
           Farming
         </button>
         {// $FlowFixMe
@@ -74,7 +75,7 @@ class UserDetail extends Component {
     );
     const greenspacesProfileSelect = (
       <div className="ph2">
-        <button onClick={this.changeProfileView} className="mh3 bn bg-white avenir pointer">
+        <button onClick={this.changeCurrentView} className="mh3 bn bg-white avenir pointer">
           Greenspaces
         </button>
         {// $FlowFixMe
