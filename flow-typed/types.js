@@ -61,6 +61,7 @@ export type FarmerBrief = {
   bio: string,
   profileImage: string,
   community: string,
+  properties?: Array<string>,
   experience: farmingExperienceLevel,
   skills?: Array<farmingSkills>
 };
