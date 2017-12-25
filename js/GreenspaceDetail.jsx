@@ -131,7 +131,7 @@ class GreenspaceDetail extends Component {
     );
 
     return (
-      <section className="mb5" style={{ paddingTop: '96px' }}>
+      <section className="mb5">
         {mainBgImg}
 
         <article className="ph4">

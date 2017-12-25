@@ -57,7 +57,7 @@ class UserDetail extends Component {
       }
     }
     let userView;
-
+    // $FlowFixMe
     if (this.state.currentView === 'farming') {
       userView = (
         <UserFarmingView
@@ -69,6 +69,7 @@ class UserDetail extends Component {
               bio: this.props.user.bio,
               profileImage: this.props.user.profileImage,
               community: this.props.user.community,
+              properties: this.props.user.farmingPropertyIDs,
               experience: this.props.user.farmingExperienceLevel,
               skills: this.props.user.farmingSkills
             }
@@ -124,7 +125,7 @@ class UserDetail extends Component {
     );
 
     return (
-      <section style={{ paddingTop: '96px' }}>
+      <section>
         <header>
           <div className="bg-near-white tc pb3 pt5">
             <div
