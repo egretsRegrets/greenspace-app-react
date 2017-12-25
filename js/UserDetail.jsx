@@ -5,6 +5,8 @@
 
 import React, { Component } from 'react';
 import type { RouterHistory } from 'react-router-dom';
+import UserFarmingView from './UserFarmingView';
+import UserGreenspacesView from './UserGreenspacesView';
 
 // $FlowFixMe
 class UserDetail extends Component {
@@ -53,6 +55,44 @@ class UserDetail extends Component {
       } else {
         volunteeringGsPhrase = `volunteering 1 greenspace`;
       }
+    }
+    let userView;
+
+    if (this.state.currentView === 'farming') {
+      userView = (
+        <UserFarmingView
+          farmer={Object.assign(
+            {},
+            {
+              userName: this.props.user.userName,
+              id: this.props.user.id,
+              bio: this.props.user.bio,
+              profileImage: this.props.user.profileImage,
+              community: this.props.user.community,
+              experience: this.props.user.farmingExperienceLevel,
+              skills: this.props.user.farmingSkills
+            }
+          )}
+        />
+      );
+    } else {
+      userView = (
+        <UserGreenspacesView
+          greenspaceOwner={Object.assign(
+            {},
+            {
+              id: this.props.user.id,
+              userName: this.props.user.userName,
+              bio: this.props.user.bio,
+              profileImage: this.props.user.profileImage,
+              email: this.props.user.email,
+              community: this.props.user.community,
+              ownedPropertyIDs: this.props.user.ownedPropertyIDs,
+              desiredLandOwnerParticipation: this.props.user.desiredLandOwnerParticipation
+            }
+          )}
+        />
+      );
     }
 
     const gsFarmingNum = (
@@ -106,8 +146,8 @@ class UserDetail extends Component {
             {this.props.user.farmer ? farmerProfileSelect : null}
             {this.props.user.landOwner ? greenspacesProfileSelect : null}
           </div>
-          <code>{JSON.stringify(this.props.user)}</code>
         </header>
+        <div>{userView}</div>
       </section>
     );
   }

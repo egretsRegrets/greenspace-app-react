@@ -65,6 +65,17 @@ export type FarmerBrief = {
   skills?: Array<farmingSkills>
 };
 
+export type GreenspaceOwnerBrief = {
+  id: string,
+  userName: string,
+  bio: string,
+  profileImage: string,
+  email: string,
+  community: string,
+  ownedPropertyIDs?: Array<string>,
+  desiredLandOwnerParticipation?: landOwnerParticipationLevels
+};
+
 declare type ActionType = 'SET_TEST_PHRASE';
 
 declare type ActionT<A: ActionType, P> = {|
