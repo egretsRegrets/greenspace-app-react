@@ -24,7 +24,7 @@ class Greenspaces extends Component {
   render() {
     const cardsPerPage = 8;
     return (
-      <div className="pv6 ph5">
+      <div className="ph5">
         <section className="flex flex-wrap justify-between pv4">
           {// $FlowFixMe
           PaginationSlice(this.props.greenspaces, this.state.pageNumber, cardsPerPage).map((greenspace: Greenspace) => (

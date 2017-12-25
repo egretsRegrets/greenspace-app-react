@@ -33,7 +33,7 @@ class Farmers extends Component {
     );
 
     return (
-      <section className="pv6 ph5">
+      <section className="ph5">
         {/* delimit num per section by specific number, add margin to bottom of each section */}
         {cards}
         <NextPreviousBtns

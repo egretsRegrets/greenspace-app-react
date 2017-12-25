@@ -19,6 +19,7 @@ const App = () => (
   <Provider store={store}>
     <div className="app">
       <GlobalHeader />
+
       <Switch>
         <Route exact path="/" component={Landing} />
         <Route path="/greenspaces" component={props => <Greenspaces greenspaces={preload.greenspaces} {...props} />} />
