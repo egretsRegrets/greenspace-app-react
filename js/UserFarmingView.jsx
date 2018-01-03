@@ -14,24 +14,39 @@ const UserFarmingView = (props: { farmer: FarmerBrief }) => {
   );
   const farmingGreenspacesList = <Greenspaces greenspaces={farmingGreenspaces} />;
   let farmingSkillList;
+  let experienceOutlineColor: string;
   if (props.farmer.skills) {
     farmingSkillList = (
-      <div>
-        <h5>Farming Skills:</h5>
-        {props.farmer.skills.map((skill: string) => <li key={skill}>{skill}</li>)}
+      <div className="avenir">
+        <h5 className="mb2 f5 i">Farming Skills:</h5>
+        <ul className="pb3 pl0">
+          {props.farmer.skills.map((skill: farmingSkills) => (
+            <li key={skill} className="dib pv2 ph3 bg-green white mr3">
+              {skill}
+            </li>
+          ))}
+        </ul>
       </div>
     );
+  }
+  if (props.farmer.experience === 'novice') {
+    experienceOutlineColor = 'near-white';
+  } else if (props.farmer.experience === 'intermediate') {
+    experienceOutlineColor = 'near-black';
+  } else {
+    experienceOutlineColor = 'green';
   }
   return (
     <section>
       <div className="pl5">
-        <h4 className="avenir f4 ttc">{`${props.farmer.experience} farmer`}</h4>
+        <h4 className={`mb2 pv2 ph3 dib ba bw2 b--${experienceOutlineColor} avenir f4 ttc`}>{`${
+          props.farmer.experience
+        } farmer`}</h4>
         {farmingSkillList}
-        <p className="lh-copy avenir">{props.farmer.bio}</p>
+        <p className="mw8 lh-copy avenir">{props.farmer.bio}</p>
         {farmingGreenspaces.length ? farmingGreenspacesTitle : null}
       </div>
       {farmingGreenspaces.length ? farmingGreenspacesList : null}
-      <code>{JSON.stringify(props.farmer)}</code>
     </section>
   );
 };
