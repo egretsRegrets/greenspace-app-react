@@ -1,46 +1,29 @@
 // @flow
 
-import React, { Component } from 'react';
+import React from 'react';
 import GreenspaceCard from './GreenspaceCard';
-import { NextPreviousBtns } from './utilComponents/PageControls';
 import { PaginationSlice } from './utils';
 
-// $FlowFixMe
-class GreenspaceCardList extends Component {
-  constructor() {
-    super();
-    // $FlowFixMe
-    this.state = {
-      pageNumber: 1
-    };
-  }
-
-  props: { greenspaceCardList: Array<Greenspace> };
-
-  updatePage = (val: number) =>
-    // $FlowFixMe
-    this.setState({ pageNumber: parseInt(val, 10) });
-
-  render() {
-    const cardsPerPage = 8;
-    return (
-      <div className="ph5">
-        <section className="flex flex-wrap justify-start pv4">
-          {// $FlowFixMe
-          PaginationSlice(this.props.greenspaceCardList, this.state.pageNumber, cardsPerPage).map(
+const GreenspaceCardList = (props: {
+  greenspaceCardList: Array<Greenspace>,
+  currentPageNumber: number | null,
+  cardsPerPage: number | null
+}) => (
+  <div className="ph5">
+    <section className="flex flex-wrap justify-start pv4">
+      {/* 
+            if pagination info was passed in props, then list the greenspace cards sliced for current page and cars per pages
+            else just map cards from all of the greenspaces passed - this way we don't have to always specify pagination for greenspaces 
+          */}
+      {props.currentPageNumber && props.cardsPerPage
+        ? PaginationSlice(props.greenspaceCardList, props.currentPageNumber, props.cardsPerPage).map(
             (greenspace: Greenspace) => <GreenspaceCard {...greenspace} key={greenspace.id} />
-          )}
-        </section>
-        <NextPreviousBtns
-          // $FlowFixMe
-          pageNumber={this.state.pageNumber}
-          dataLength={this.props.greenspaceCardList.length}
-          cardsPerPage={cardsPerPage}
-          clickHandler={this.updatePage}
-        />
-      </div>
-    );
-  }
-}
+          )
+        : props.greenspaceCardList.map((greenspace: Greenspace) => (
+            <GreenspaceCard {...greenspace} key={greenspace.id} />
+          ))}
+    </section>
+  </div>
+);
 
 export default GreenspaceCardList;
