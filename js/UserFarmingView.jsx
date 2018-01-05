@@ -2,7 +2,7 @@
 
 import React from 'react';
 import preload from '../data.json';
-import Greenspaces from './Greenspaces';
+import GreenspaceCardList from './GreenspaceCardList';
 
 const UserFarmingView = (props: { farmer: FarmerBrief }) => {
   const farmingGreenspaces = preload.greenspaces.filter(
@@ -12,7 +12,7 @@ const UserFarmingView = (props: { farmer: FarmerBrief }) => {
   const farmingGreenspacesTitle = (
     <h3 className="mt5 mb0 f3 avenir near-black">{`Greenspaces ${props.farmer.userName} is Farming`}</h3>
   );
-  const farmingGreenspacesList = <Greenspaces greenspaces={farmingGreenspaces} />;
+  const farmingGreenspacesList = <GreenspaceCardList greenspaceCardList={farmingGreenspaces} />;
   let farmingSkillList;
   let experienceOutlineColor: string;
   if (props.farmer.skills) {

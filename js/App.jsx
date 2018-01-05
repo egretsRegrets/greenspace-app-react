@@ -8,7 +8,7 @@ import store from './store';
 import preload from '../data.json';
 import Landing from './Landing';
 import GlobalHeader from './GlobalHeader';
-import Greenspaces from './Greenspaces';
+import GreenSpaces from './Greenspaces';
 import GreenspaceDetail from './GreenspaceDetail';
 import UserDetail from './UserDetail';
 import Farmers from './Farmers';
@@ -22,7 +22,7 @@ const App = () => (
 
       <Switch>
         <Route exact path="/" component={Landing} />
-        <Route path="/greenspaces" component={props => <Greenspaces greenspaces={preload.greenspaces} {...props} />} />
+        <Route path="/greenspaces" component={props => <GreenSpaces greenSpaces={preload.greenspaces} {...props} />} />
         <Route
           path="/greenspace/:id"
           component={(props: { match: Match, history: RouterHistory }) => {
