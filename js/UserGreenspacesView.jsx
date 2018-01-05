@@ -15,14 +15,12 @@ const UserGreenspaceView = (props: { greenspaceOwner: GreenspaceOwnerBrief }) =>
   );
   const lendingGreenspacesList = <Greenspaces greenspaces={ownedGreenspaces} />;
   let landownerParticipationInfo;
-  let participationColor: string;
+  let participationColor = 'green';
   if (props.greenspaceOwner.desiredLandOwnerParticipation) {
     if (props.greenspaceOwner.desiredLandOwnerParticipation === 'hands-off') {
       participationColor = 'near-white';
     } else if (props.greenspaceOwner.desiredLandOwnerParticipation === 'helping hand') {
       participationColor = 'near-black';
-    } else {
-      participationColor = 'green';
     }
   }
   if (props.greenspaceOwner.desiredLandOwnerParticipation) {
