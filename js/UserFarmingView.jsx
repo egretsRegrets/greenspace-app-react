@@ -38,7 +38,7 @@ const UserFarmingView = (props: { farmer: FarmerBrief }) => {
   }
   return (
     <section>
-      <div className="pl5">
+      <div className="ph5">
         <h4 className={`mb2 pv2 ph3 dib ba bw2 b--${experienceOutlineColor} avenir f4 ttc`}>{`${
           props.farmer.experience
         } farmer`}</h4>
