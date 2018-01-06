@@ -2,7 +2,7 @@
 
 import React from 'react';
 import GreenspaceCard from './GreenspaceCard';
-import { PaginationSlice } from './utils';
+import { paginationSlice } from './utils';
 
 const GreenspaceCardList = (props: {
   greenspaceCardList: Array<Greenspace>,
@@ -16,7 +16,7 @@ const GreenspaceCardList = (props: {
             else just map cards from all of the greenspaces passed - this way we don't have to always specify pagination for greenspaces 
           */}
       {props.currentPageNumber && props.cardsPerPage
-        ? PaginationSlice(props.greenspaceCardList, props.currentPageNumber, props.cardsPerPage).map(
+        ? paginationSlice(props.greenspaceCardList, props.currentPageNumber, props.cardsPerPage).map(
             (greenspace: Greenspace) => <GreenspaceCard {...greenspace} key={greenspace.id} />
           )
         : props.greenspaceCardList.map((greenspace: Greenspace) => (
