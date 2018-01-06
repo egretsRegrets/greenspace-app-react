@@ -9,13 +9,13 @@ const FarmerCardList = (props: {
   currentPageNumber: number | null,
   cardsPerPage: number | null
 }) => (
-  <section className="ph5">
+  <div className="flex flex-wrap justify-start pv4">
     {props.currentPageNumber && props.cardsPerPage
       ? paginationSlice(props.farmerCardList, props.currentPageNumber, props.cardsPerPage).map(
           (farmer: FarmerBrief) => <FarmerCard key={farmer.id} {...farmer} />
         )
       : props.farmerCardList.map((farmer: FarmerBrief) => <FarmerCard key={farmer.id} {...farmer} />)}
-  </section>
+  </div>
 );
 
 export default FarmerCardList;
