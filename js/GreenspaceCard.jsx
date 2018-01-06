@@ -25,7 +25,7 @@ const GreenspaceCard = (props: Greenspace) => {
 
   // if
   return (
-    <div className="w-25 mb3 pr4 pv3">
+    <div className="mt3" style={{ width: '23%', marginRight: '2%', marginBottom: '48px' }}>
       <section className="h-100 bg-near-white br3 shadow-5">
         <div
           className="h4 w-100 bg-center cover bg-dark-green br3 br--top"
