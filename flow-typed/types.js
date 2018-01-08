@@ -78,11 +78,26 @@ export type GreenspaceOwnerBrief = {
 };
 
 // action types for reducers
-declare type ActionType = 'SET_TEST_PHRASE';
+
+export type greenspacesFilters = {
+  plotSize: {
+    largePlot: boolean,
+    microPlot: boolean,
+    backYard: boolean,
+    frontYard: boolean,
+    fullYard: boolean
+  },
+  seekingFarmer: {
+    yes: boolean,
+    no: boolean
+  }
+};
+
+declare type ActionType = 'SET_GREENSPACES_FILTERS';
 
 declare type ActionT<A: ActionType, P> = {|
   type: A,
   payload: P
 |};
 
-export type Action = ActionT<'SET_TEST_PHRASE', string>;
+export type Action = ActionT<'SET_GREENSPACES_FILTERS', greenspacesFilters>;

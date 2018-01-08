@@ -1,9 +1,9 @@
 // @flow
 
-import SET_TEST_PHRASE from './actions';
+import SET_GREENSPACES_FILTERS from './actions';
 
-function setTestPhrase(testPhrase: string) {
-  return { type: SET_TEST_PHRASE, payload: testPhrase };
+function setGreenspacesFilters(greenspacesFilters: greenspacesFilters) {
+  return { type: SET_GREENSPACES_FILTERS, payload: greenspacesFilters };
 }
 
-export default setTestPhrase;
+export default setGreenspacesFilters;
