@@ -1,6 +1,7 @@
 // @flow
 
 import { combineReducers } from 'redux';
+import initialState from './initialState';
 import SET_GREENSPACES_FILTERS from './actions';
 
 const user = (state = { id: '5a3074b72b40d9857018bf07' }, action: Action) => {
@@ -10,22 +11,7 @@ const user = (state = { id: '5a3074b72b40d9857018bf07' }, action: Action) => {
   return state;
 };
 
-const greenspacesFilters = (
-  state = {
-    plotSize: {
-      largePlot: true,
-      microPlot: true,
-      backYard: true,
-      frontYard: true,
-      fullYard: true
-    },
-    seekingFarmer: {
-      yes: true,
-      no: true
-    }
-  },
-  action: Action
-) => {
+const greenspacesFilters = (state = initialState.greenspacesFilters, action: Action) => {
   if (action.type === SET_GREENSPACES_FILTERS) {
     return Object.assign({}, state, action.payload);
   }
