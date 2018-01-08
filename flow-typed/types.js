@@ -77,8 +77,7 @@ export type GreenspaceOwnerBrief = {
   desiredLandOwnerParticipation?: landOwnerParticipationLevels
 };
 
-/*
-redux action types -- removed for now because of linting issue in type ActionT
+// action types for reducers
 declare type ActionType = 'SET_TEST_PHRASE';
 
 declare type ActionT<A: ActionType, P> = {|
@@ -87,4 +86,3 @@ declare type ActionT<A: ActionType, P> = {|
 |};
 
 export type Action = ActionT<'SET_TEST_PHRASE', string>;
-*/
