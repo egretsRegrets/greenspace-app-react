@@ -81,6 +81,7 @@ export type GreenspaceOwnerBrief = {
 
 export type greenspacesFilters = {
   plotSize: {
+    Any: boolean,
     largePlot: boolean,
     microPlot: boolean,
     backYard: boolean,
@@ -88,6 +89,7 @@ export type greenspacesFilters = {
     fullYard: boolean
   },
   seekingFarmer: {
+    either: boolean,
     yes: boolean,
     no: boolean
   }
