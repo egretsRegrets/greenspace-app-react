@@ -23,15 +23,47 @@ class Greenspaces extends Component {
     setFilters: Function
   };
 
+  gsFilterNameCorrection = ['large plot', 'micro plot', 'backyard', 'front-yard', 'full-yard'];
+
   updatePage = (val: number) =>
     // $FlowFixMe
     this.setState({ pageNumber: parseInt(val, 10) });
 
   updateFilters = event => this.props.setFilters(event.target.value, this.props.filters);
 
+  passesPlotSizeFilters = (plotSizeTags: Array<greenspaceTags>): boolean => {
+    if (this.props.filters.plotSize.any === true) {
+      return true;
+    }
+    const nameCorrectedFilters = Object.keys(this.props.filters.plotSize)
+      .slice(1)
+      .map((tag: string, index) => {
+        if (this.props.filters.plotSize[tag]) {
+          return this.gsFilterNameCorrection[index];
+        }
+        return null;
+      });
+    return nameCorrectedFilters.some(tag => plotSizeTags.indexOf(tag) >= 0);
+  };
+
+  passesSeekingFarmerFilters = (seekingFarmer: boolean) => {
+    if (this.props.filters.seekingFarmer.either) {
+      return true;
+    }
+    if (seekingFarmer) {
+      if (this.props.filters.seekingFarmer.yes) {
+        return true;
+      }
+    }
+    if (!this.props.filters.seekingFarmer) {
+      return true;
+    }
+    return false;
+  };
+
   render() {
     const cardsPerPage = 8;
-    const filterBtnsPlotSizeTxt = ['Any', 'Large Plot', 'Micro Plot', 'Backyard', 'frontyard', 'Full Yard'];
+    const filterBtnsPlotSizeTxt = ['Any', 'Large Plot', 'Micro Plot', 'Backyard', 'Frontyard', 'Full Yard'];
     return (
       <section>
         <div className="pt4 pb0">
@@ -86,7 +118,10 @@ class Greenspaces extends Component {
           </div>
         </div>
         <GreenspaceCardList
-          greenspaceCardList={this.props.greenspaces}
+          greenspaceCardList={this.props.greenspaces.filter(
+            (greenspace: Greenspace) =>
+              this.passesPlotSizeFilters(greenspace.tags) && this.passesSeekingFarmerFilters(greenspace.farmerDesired)
+          )}
           // $FlowFixMe
           currentPageNumber={this.state.pageNumber}
           cardsPerPage={cardsPerPage}
