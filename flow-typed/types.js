@@ -7,7 +7,7 @@ declare var module: {
 };
 
 declare type farmerParticipationLevel = 'solo Farmer' | 'co-Farmer' | 'helping hand';
-declare type greenspaceTags = 'backyard' | 'front-yard' | 'full-yard' | 'large plot' | 'micro plot';
+export type greenspaceTags = 'backyard' | 'front-yard' | 'full-yard' | 'large plot' | 'micro plot';
 declare type cropTypes = 'fruits' | 'vegetables' | 'herbs' | 'ornamental';
 
 export type Greenspace = {
