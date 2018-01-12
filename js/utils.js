@@ -59,3 +59,15 @@ export const scrollToElem = (
 // takes a per-page slice of paginated content
 export const paginationSlice = (items: Array<Object>, pageNumber: number, cardsPerPage: number) =>
   items.slice(pageNumber * cardsPerPage - (cardsPerPage - 1) - 1, pageNumber * cardsPerPage);
+
+// for updating a filter with two options, one of which, if true, sets the other to false:
+export const updateBinaryFilter = (
+  filter: 'yes' | 'no' | 'both',
+  filterState: { yes: boolean, no: boolean }
+): { yes: boolean, no: boolean } => {
+  if (filter === 'both') {
+    return Object.assign({}, filterState, { yes: true, no: true });
+  }
+  // if the selected filter isn't 'both', we just flip no matter what - this does mean that a second click on a yes/no filter will flip.
+  return Object.assign({}, filterState, { yes: !filterState.yes, no: !filterState.no });
+};
