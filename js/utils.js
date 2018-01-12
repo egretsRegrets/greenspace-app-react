@@ -61,7 +61,7 @@ export const paginationSlice = (items: Array<Object>, pageNumber: number, cardsP
   items.slice(pageNumber * cardsPerPage - (cardsPerPage - 1) - 1, pageNumber * cardsPerPage);
 
 // for updating a filter with two options, one of which, if true, sets the other to false:
-export const updateBinaryFilter = (
+const updateBinaryFilter = (
   filter: 'yes' | 'no' | 'both',
   filterState: { yes: boolean, no: boolean }
 ): { yes: boolean, no: boolean } => {
