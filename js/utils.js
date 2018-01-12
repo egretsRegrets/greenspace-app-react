@@ -62,12 +62,35 @@ export const paginationSlice = (items: Array<Object>, pageNumber: number, cardsP
 
 // for updating a filter with two options, one of which, if true, sets the other to false:
 const updateBinaryFilter = (
-  filter: 'yes' | 'no' | 'both',
-  filterState: { yes: boolean, no: boolean }
+  filter: 'yes' | 'no' | 'any',
+  filtersState: { yes: boolean, no: boolean }
 ): { yes: boolean, no: boolean } => {
-  if (filter === 'both') {
-    return Object.assign({}, filterState, { yes: true, no: true });
+  if (filter === 'any') {
+    return Object.assign({}, filtersState, { yes: true, no: true });
   }
   // if the selected filter isn't 'both', we just flip no matter what - this does mean that a second click on a yes/no filter will flip.
-  return Object.assign({}, filterState, { yes: !filterState.yes, no: !filterState.no });
+  return Object.assign({}, filtersState, { yes: !filtersState.yes, no: !filtersState.no });
+};
+
+export const updateFilters = (filter: 'any' | string, filtersState: {}, isBinaryFilter: boolean = false) => {
+  if (isBinaryFilter) {
+    // $FlowFixMe
+    return updateBinaryFilter(filter, filtersState);
+  }
+  if (filter === 'any') {
+    // setting all filters to true
+    const changedFiltersState = {};
+    Object.keys(filtersState).forEach(key => {
+      // only add/set prop if prop is not already true
+      if (!filtersState[key]) {
+        changedFiltersState[key] = true;
+      }
+    });
+    return Object.assign({}, filtersState, changedFiltersState);
+  }
+  // creating single prop object - props with key of filter and opposite value of filter in current filter state
+  const newFilter = {};
+  // $FlowFixMe
+  newFilter[filter] = !filtersState[filter];
+  return Object.assign({}, filtersState, newFilter);
 };
