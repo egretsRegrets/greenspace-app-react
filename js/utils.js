@@ -72,7 +72,7 @@ const updateBinaryFilter = (
   return Object.assign({}, filtersState, { yes: !filtersState.yes, no: !filtersState.no });
 };
 
-export const updateFilters = (filter: 'any' | string, filtersState: {}, isBinaryFilter: boolean = false) => {
+export const updateFilters = (filter: 'any' | string, filtersState: {}, isBinaryFilter: boolean = false): {} => {
   if (isBinaryFilter) {
     // $FlowFixMe
     return updateBinaryFilter(filter, filtersState);
@@ -93,4 +93,18 @@ export const updateFilters = (filter: 'any' | string, filtersState: {}, isBinary
   // $FlowFixMe
   newFilter[filter] = !filtersState[filter];
   return Object.assign({}, filtersState, newFilter);
+};
+
+/**
+ * return nested object representing state of all filters for view/component
+ * @param {Array<string>} filterNames - the name of each filter type to be composed, will be prop key in returned obj
+ * @param {Array<{any}>} filterStates - the states of each filter in return filters obj, should be in same ordered as filterNames
+ * @param {Object<any>} currentFilters - the current state of view/component filters - optional
+ */
+export const composeFilters = (filterNames: Array<string>, filterStates: Array<{}>, currentFilters: {} = {}): {} => {
+  const newFilters = {};
+  filterNames.forEach((name: string, index: number) => {
+    newFilters[name] = filterStates[index];
+  });
+  return Object.assign({}, currentFilters, newFilters);
 };
