@@ -68,8 +68,11 @@ const updateBinaryFilter = (
   if (filter === 'any') {
     return Object.assign({}, filtersState, { yes: true, no: true });
   }
-  // if the selected filter isn't 'both', we just flip no matter what - this does mean that a second click on a yes/no filter will flip.
-  return Object.assign({}, filtersState, { yes: !filtersState.yes, no: !filtersState.no });
+  if (filter === 'yes') {
+    return Object.assign({}, filtersState, { yes: true, no: false });
+  }
+  // return for 'no' selected is default
+  return Object.assign({}, filtersState, { yes: false, no: true });
 };
 
 export const updateFilters = (filter: 'any' | string, filtersState: {}, isBinaryFilter: boolean = false): {} => {
