@@ -75,7 +75,7 @@ const updateBinaryFilter = (
   return Object.assign({}, filtersState, { yes: false, no: true });
 };
 
-export const updateFilterState = (filter: 'any' | string, filtersState: {}, isBinaryFilter: boolean = false): {} => {
+export const updateFilter = (filter: 'any' | string, filtersState: {}, isBinaryFilter: boolean = false): {} => {
   if (isBinaryFilter) {
     // $FlowFixMe
     return updateBinaryFilter(filter, filtersState);
