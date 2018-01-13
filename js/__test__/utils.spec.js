@@ -1,6 +1,6 @@
 // @flow
 
-import { updateFilter, composeFilters } from '../utils';
+import { updateFilter, composeFilters, resolveFiltersState } from '../utils';
 
 const farmerDesiredFilter = {
   initial: {
@@ -121,4 +121,50 @@ test('composeFilters with one binary filter, one non-binary', () => {
       preComposeFilters
     )
   ).toEqual(postComposeFilters);
+});
+
+// testing resolveFiltersState
+
+const preResolveFilters = {
+  nonBinary: {
+    initial: false,
+    filter1: true,
+    filter2: false,
+    filter3: false
+  },
+  binary: {
+    yes: true,
+    no: false
+  }
+};
+
+const postResolveFilters1 = {
+  nonBinary: {
+    initial: false,
+    filter1: true,
+    filter2: false,
+    filter3: true
+  },
+  binary: {
+    yes: true,
+    no: false
+  }
+};
+
+const postResolveFilters2 = {
+  nonBinary: {
+    initial: false,
+    filter1: true,
+    filter2: false,
+    filter3: true
+  },
+  binary: {
+    yes: false,
+    no: true
+  }
+};
+
+test('test resovleFiltersState() with option change to 1 non-binary filter, followed by 1 binary filter in 2 filter state', () => {
+  expect(resolveFiltersState('filter3', preResolveFilters)).toEqual(postResolveFilters1);
+  expect(resolveFiltersState('no', postResolveFilters1)).toEqual(postResolveFilters2);
 });
