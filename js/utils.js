@@ -60,6 +60,38 @@ export const scrollToElem = (
 export const paginationSlice = (items: Array<Object>, pageNumber: number, cardsPerPage: number) =>
   items.slice(pageNumber * cardsPerPage - (cardsPerPage - 1) - 1, pageNumber * cardsPerPage);
 
+/**
+ * => initialState obj for filters
+ * @param {Object with any num props of any name of type Array<string> } filters - filter objects, keys are the filter name,
+ *  vals are array of strings that translate to filter options
+ * Each prop of filters becomes a prop of returned initialState obj
+ * Each val in filters.<prop> becomes a prop of initialState.<prop>,
+ *  all initialState.<prop> child props are given val true
+ */
+export const initializeFilterState = (filters: {}): {} => {
+  const initialState = {};
+  Object.keys(filters).forEach(key => {
+    const filterOptions = {};
+    filters[key].forEach(innerKey => {
+      filterOptions[innerKey] = true;
+    });
+    initialState[key] = filterOptions;
+  });
+  return initialState;
+};
+
+const isFilterBinary = (filterState: {}) => Object.keys(filterState).length === 2;
+
+const filterFromOption = (option: string, filterState: {}): string | null => {
+  let filter: string | null = null;
+  Object.keys(filterState).forEach(key => {
+    if (Object.keys(filterState[key]).includes(option)) {
+      filter = key;
+    }
+  });
+  return filter;
+};
+
 // for updating a filter with two options, one of which, if true, sets the other to false:
 const updateBinaryFilter = (
   filter: 'yes' | 'no' | 'any',
@@ -110,6 +142,22 @@ export const updateFilter = (filter: 'any' | string, filtersState: {}, isBinaryF
   return Object.assign({}, filtersState, newFilter);
 };
 
+export const resolveFiltersState = (option: string, filterState: {}): {} => {
+  const updatedFilter = filterFromOption(option, filterState);
+  if (updatedFilter === null) {
+    // CONSOLE WARNING
+    console.error(`the provided option value, ${option}, does not exist in filters: ${JSON.stringify(filterState)}`);
+    return filterState;
+  }
+  const updatedFiltersState = {};
+  updatedFiltersState[updatedFilter] = updateFilter(
+    option,
+    filterState[updatedFilter],
+    isFilterBinary(filterState[updatedFilter])
+  );
+  return Object.assign({}, filterState, updatedFiltersState);
+};
+
 /**
  * return nested object representing state of all filters for view/component
  * @param {Array<string>} filterNames - the name of each filter type to be composed, will be prop key in returned obj
@@ -122,24 +170,4 @@ export const composeFilters = (filterNames: Array<string>, filterStates: Array<{
     newFilters[name] = filterStates[index];
   });
   return Object.assign({}, currentFilters, newFilters);
-};
-
-/**
- * => initialState obj for filters
- * @param {Object with any num props of any name of type Array<string> } filters - filter objects, keys are the filter name,
- *  vals are array of strings that translate to filter options
- * Each prop of filters becomes a prop of returned initialState obj
- * Each val in filters.<prop> becomes a prop of initialState.<prop>,
- *  all initialState.<prop> child props are given val true
- */
-export const initializeFilterState = (filters: {}): {} => {
-  const initialState = {};
-  Object.keys(filters).forEach(key => {
-    const filterOptions = {};
-    filters[key].forEach(innerKey => {
-      filterOptions[innerKey] = true;
-    });
-    initialState[key] = filterOptions;
-  });
-  return initialState;
 };
