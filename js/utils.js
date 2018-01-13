@@ -92,8 +92,8 @@ export const updateFilters = (filter: 'any' | string, filtersState: {}, isBinary
     });
     return Object.assign({}, filtersState, changedFiltersState);
   }
-  // if filtersState.none is true, then a filter btn filters result to only that filter
-  if (filtersState.none) {
+  // if filtersState.initial is true, then a filter btn filters result to only that filter
+  if (filtersState.initial) {
     const changedFiltersState = {};
     Object.keys(filtersState).forEach(key => {
       if (key !== filter) {
@@ -102,7 +102,7 @@ export const updateFilters = (filter: 'any' | string, filtersState: {}, isBinary
     });
     return Object.assign({}, filtersState, changedFiltersState);
   }
-  // if filtersState.none is not true, filter btns toggle that filter
+  // if filtersState.initial is not true, filter btns toggle that filter
   // creating single prop object - props with key of filter and opposite value of filter in current filter state
   const newFilter = {};
   // $FlowFixMe
@@ -122,4 +122,24 @@ export const composeFilters = (filterNames: Array<string>, filterStates: Array<{
     newFilters[name] = filterStates[index];
   });
   return Object.assign({}, currentFilters, newFilters);
+};
+
+/**
+ * => initialState obj for filters
+ * @param {Object with any num props of any name of type Array<string> } filters - filter objects, keys are the filter name,
+ *  vals are array of strings that translate to filter options
+ * Each prop of filters becomes a prop of returned initialState obj
+ * Each val in filters.<prop> becomes a prop of initialState.<prop>,
+ *  all initialState.<prop> child props are given val true
+ */
+export const initializeFilterState = (filters: {}): {} => {
+  const initialState = {};
+  Object.keys(filters).forEach(key => {
+    const filterOptions = {};
+    filters[key].forEach(innerKey => {
+      filterOptions[innerKey] = true;
+    });
+    initialState[key] = filterOptions;
+  });
+  return initialState;
 };
