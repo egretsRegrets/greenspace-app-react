@@ -1,6 +1,6 @@
 // @flow
 
-import { updateFilters } from '../utils';
+import { updateFilters, composeFilters } from '../utils';
 
 const farmerDesiredFilter = {
   initial: {
@@ -41,6 +41,7 @@ test('updateFilters with binaryFilters - test for value = no', () => {
   expect(updateFilters('no', farmerDesiredFilter.no, true)).toEqual(farmerDesiredFilter.no);
 });
 
+// test general/non-binary filter
 const exampGeneralFilters = {
   initial: {
     none: true,
@@ -68,7 +69,6 @@ const exampGeneralFilters = {
   }
 };
 
-// test general/non-binary filter
 test('updateFilters with non-binary: filter1 selected from initial state', () => {
   expect(updateFilters('filter1', exampGeneralFilters.initial)).toEqual(exampGeneralFilters.fromInitialSel1);
 });
@@ -83,4 +83,45 @@ test('updateFilters with non-binary: filter2 selected from filter1 and filter2 a
 
 test('updateFilters with non-binary: any selected from filter1 and filter2 already selected', () => {
   expect(updateFilters('any', exampGeneralFilters.from1Sel2)).toEqual(exampGeneralFilters.initial);
+});
+
+// testing composeFilters
+
+const preComposeFilters = {
+  nonBinary: {
+    none: false,
+    filter1: true,
+    filter2: false,
+    filter3: false
+  },
+  binary: {
+    yes: false,
+    no: true
+  }
+};
+
+const postComposeFilters = {
+  nonBinary: {
+    none: false,
+    filter1: true,
+    filter2: false,
+    filter3: true
+  },
+  binary: {
+    yes: true,
+    no: false
+  }
+};
+
+test('composeFilters with one binary filter, one non-binary', () => {
+  expect(
+    composeFilters(
+      ['nonBinary', 'binary'],
+      [
+        updateFilters('filter3', exampGeneralFilters.fromInitialSel1),
+        updateFilters('yes', farmerDesiredFilter.no, true)
+      ],
+      preComposeFilters
+    )
+  ).toEqual(postComposeFilters);
 });
