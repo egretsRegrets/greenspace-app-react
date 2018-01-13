@@ -82,7 +82,8 @@ export const initializeFilterState = (filters: {}): {} => {
 
 const isFilterBinary = (filterState: {}) => Object.keys(filterState).length === 2;
 
-const filterFromOption = (option: string, filterState: {}): string | null => {
+/*
+function filterFromOption (option: string, filterState: {}): string | null {
   let filter: string | null = null;
   Object.keys(filterState).forEach(key => {
     if (Object.keys(filterState[key]).includes(option)) {
@@ -91,13 +92,14 @@ const filterFromOption = (option: string, filterState: {}): string | null => {
   });
   return filter;
 };
+*/
 
 // for updating a filter with two options, one of which, if true, sets the other to false:
 const updateBinaryFilter = (
-  filter: 'yes' | 'no' | 'initial',
+  filter: 'yes' | 'no' | 'binaryBoth',
   filtersState: { yes: boolean, no: boolean }
 ): { yes: boolean, no: boolean } => {
-  if (filter === 'initial') {
+  if (filter === 'binaryBoth') {
     return Object.assign({}, filtersState, { yes: true, no: true });
   }
   if (filter === 'yes') {
@@ -142,18 +144,10 @@ export const updateFilter = (filter: 'initial' | string, filtersState: {}, isBin
   return Object.assign({}, filtersState, newFilter);
 };
 
-export const resolveFiltersState = (option: string, filterState: {}): {} => {
-  const updatedFilter = filterFromOption(option, filterState);
-  if (updatedFilter === null) {
-    // if no filter exists that contains the provided option - then the option given is incompatible - check ui element val
-    // CONSOLE WARNING - replace console.error with dev error surfacing in components
-    console.error(`the provided option value, ${option}, does not exist in filters: ${JSON.stringify(filterState)}`);
-    return filterState;
-  }
-  // targetFilter is the filter in filterState that will be updated
-  const targetFilter = filterState[updatedFilter];
+export const resolveFiltersState = (option: string, targetFilterName: string, filterState: {}): {} => {
+  const targetFilter = filterState[targetFilterName];
   const updatedFiltersState = {};
-  updatedFiltersState[updatedFilter] = updateFilter(option, targetFilter, isFilterBinary(targetFilter));
+  updatedFiltersState[targetFilterName] = updateFilter(option, targetFilter, isFilterBinary(targetFilter));
   return Object.assign({}, filterState, updatedFiltersState);
 };
 
