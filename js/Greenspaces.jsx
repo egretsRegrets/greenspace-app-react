@@ -4,8 +4,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import setGreenspacesFilters from './actionCreators';
 import GreenspaceCardList from './GreenspaceCardList';
-import FilterButton from './utilComponents/FilterButton';
+import FilterButtonRow from './utilComponents/FilterButtonRow';
 import { NextPreviousBtns } from './utilComponents/PageControls';
+import { resolveFiltersState } from './utils';
 
 // $FlowFixMe
 class Greenspaces extends Component {
@@ -29,7 +30,7 @@ class Greenspaces extends Component {
     // $FlowFixMe
     this.setState({ pageNumber: parseInt(val, 10) });
 
-  updateFilters = event => this.props.setFilters(event.target.value, this.props.filters);
+  updateFilterOption = (option: string, filter: string) => this.props.setFilters(option, filter, this.props.filters);
 
   passesPlotSizeFilters = (plotSizeTags: Array<greenspaceTags>): boolean => {
     if (this.props.filters.plotSize.any === true) {
@@ -46,16 +47,19 @@ class Greenspaces extends Component {
     return nameCorrectedFilters.some(tag => plotSizeTags.indexOf(tag) >= 0);
   };
 
-  passesSeekingFarmerFilters = (seekingFarmer: boolean) => {
-    if (this.props.filters.seekingFarmer.either) {
+  passesSeekingFarmerFilters = (farmerDesired: boolean) => {
+    const seekingFarmer = this.props.filters.farmerDesired.yes;
+    const seeTheFarmers = this.props.filters.farmerDesired.no;
+    // filter.farmerDesired is in initial state
+    if (seekingFarmer && seeTheFarmers) {
       return true;
     }
-    if (seekingFarmer) {
-      if (this.props.filters.seekingFarmer.yes) {
-        return true;
-      }
+    // filter.farmerDesired.yes and greenspace.farmerDesired are true
+    if (seekingFarmer && farmerDesired) {
+      return true;
     }
-    if (!this.props.filters.seekingFarmer) {
+    // filter.farmerDesired.no is true and greenspace.farmerDesired is false
+    if (seeTheFarmers && !farmerDesired) {
       return true;
     }
     return false;
@@ -63,7 +67,7 @@ class Greenspaces extends Component {
 
   render() {
     const cardsPerPage = 8;
-    const filterBtnsPlotSizeTxt = ['Any', 'Large Plot', 'Micro Plot', 'Backyard', 'Frontyard', 'Full Yard'];
+    const btnTxtPlotSize = ['Any', 'Large Plot', 'Micro Plot', 'Backyard', 'Frontyard', 'Full Yard'];
     return (
       <section>
         <div className="pt4 pb0">
@@ -88,31 +92,25 @@ class Greenspaces extends Component {
                 <button className="mr3 pl1 pr3 pv1 bg-transparent bt-0 br-0 bb bl-0 bw2 b--green fw6 f5 avenir tl pointer">
                   Plot Size
                 </button>
-                <div className="flex justify-start">
-                  {Object.keys(this.props.filters.plotSize).map((filterKey: string, index) => (
-                    <FilterButton
-                      key={filterKey}
-                      val={filterKey}
-                      text={filterBtnsPlotSizeTxt[index]}
-                      updateFilter={this.updateFilters}
-                    />
-                  ))}
-                </div>
+                <FilterButtonRow
+                  filter="plotSize"
+                  filterOptions={Object.keys(this.props.filters.plotSize)}
+                  changeFilter={this.updateFilterOption}
+                  btnTextArr={btnTxtPlotSize}
+                />
               </div>
               <div className="mr4 flex justify-start">
                 <button className="mr3 pl1 pr3 pv1 bg-transparent bt-0 br-0 bb bl-0 bw2 b--green fw6 f5 avenir tl pointer">
                   Seeking Farmers
                 </button>
-                <div className="flex justify-start">
-                  {Object.keys(this.props.filters.seekingFarmer).map((filterKey: string) => (
-                    <FilterButton
-                      key={filterKey}
-                      val={filterKey}
-                      text={filterKey.charAt(0).toUpperCase() + filterKey.slice(1)}
-                      updateFilter={this.updateFilters}
-                    />
-                  ))}
-                </div>
+                <FilterButtonRow
+                  filter="farmerDesired"
+                  filterOptions={Object.keys(this.props.filters.farmerDesired)}
+                  changeFilter={this.updateFilterOption}
+                  btnTextArr={['Yes', 'No']}
+                  includesBinaryBoth
+                  binaryBothBtnText="Either"
+                />
               </div>
             </div>
           </div>
@@ -140,59 +138,11 @@ class Greenspaces extends Component {
   }
 }
 
-function newFilters(filter: string, filtersType: 'plotSize' | 'seekingFarmer', curFilters: greenspacesFilters) {
-  if (filter === 'any' || filter === 'either') {
-    if (Object.values(curFilters[filtersType]).includes(false)) {
-      const targetFilters = curFilters[filtersType];
-      Object.keys(targetFilters).forEach(key => {
-        // $FlowFixMe
-        if (targetFilters[key] === false) {
-          // $FlowFixMe
-          targetFilters[key] = true;
-        }
-      });
-      const updatedFilters = curFilters;
-      // $FlowFixMe
-      updatedFilters[filtersType] = targetFilters;
-      return updatedFilters;
-    }
-    // if all of the filters of the filter type are already true, we just return curFilters
-    return curFilters;
-  }
-  const targetFilters = curFilters[filtersType];
-  // flip the bool of the filter in target
-  targetFilters[filter] = !curFilters[filtersType][filter];
-  // 'any' or 'either' will be index 0 of targetFilters,
-  // if index 0 is true and any values of targetFilters props are false, index 0 should be flipped.
-  if (Object.values(targetFilters)[0] === true && Object.values(targetFilters).includes(false)) {
-    // $FlowFixMe
-    targetFilters[Object.keys(targetFilters)[0]] = false;
-  }
-  // if index 0 is false, and the values of targetFilters sliced except for them - index 0 - don't include false, index 0 should be flipped
-  if (
-    Object.values(targetFilters)[0] === false &&
-    !Object.values(targetFilters)
-      .slice(1)
-      .includes(false)
-  ) {
-    // $FlowFixMe
-    targetFilters[Object.keys(targetFilters)[0]] = true;
-  }
-  const updatedFilters = curFilters;
-  // $FlowFixMe
-  updatedFilters[filtersType] = targetFilters;
-  return updatedFilters;
-}
-
 const mapStateToProps = state => ({ filters: state.greenspacesFilters });
 const mapDispatchToProps = (dispatch: Function) => ({
-  setFilters(filter, filters) {
-    // selecting the correct filter type, plotSize vs seekingFarmer based on filter button val
-    let filterType = 'seekingFarmer';
-    if (!Object.keys(filters[filterType]).includes(filter)) {
-      filterType = 'plotSize';
-    }
-    dispatch(setGreenspacesFilters(newFilters(filter, filterType, filters)));
+  setFilters(option, filter, filters) {
+    // $FlowFixMe - warning as resolveFiltersState does not explicitly return type greenspacesFilters
+    dispatch(setGreenspacesFilters(resolveFiltersState(option, filter, filters)));
   }
 });
 
