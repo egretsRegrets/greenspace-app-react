@@ -44,25 +44,25 @@ test('updateFilters with binaryFilters - test for value = no', () => {
 // test general/non-binary filter
 const exampGeneralFilters = {
   initial: {
-    none: true,
+    initial: true,
     filter1: true,
     filter2: true,
     filter3: true
   },
   fromInitialSel1: {
-    none: false,
+    initial: false,
     filter1: true,
     filter2: false,
     filter3: false
   },
   from1Sel2: {
-    none: false,
+    initial: false,
     filter1: true,
     filter2: true,
     filter3: false
   },
   from2And1Sel2: {
-    none: false,
+    initial: false,
     filter1: true,
     filter2: false,
     filter3: false
@@ -89,7 +89,7 @@ test('updateFilters with non-binary: any selected from filter1 and filter2 alrea
 
 const preComposeFilters = {
   nonBinary: {
-    none: false,
+    initial: false,
     filter1: true,
     filter2: false,
     filter3: false
@@ -102,7 +102,7 @@ const preComposeFilters = {
 
 const postComposeFilters = {
   nonBinary: {
-    none: false,
+    initial: false,
     filter1: true,
     filter2: false,
     filter3: true
