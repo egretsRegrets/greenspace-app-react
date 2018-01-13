@@ -2,8 +2,8 @@
 
 import React from 'react';
 
-const FilterButton = (props: { val: string, text: string, updateFilter: Function }) => (
-  <button className="bw0 bg-transparent avenir f6 pointer" value={props.val} onClick={props.updateFilter}>
+const FilterButton = (props: { val: string, text: string, updateFilterOption: Function }) => (
+  <button className="bw0 bg-transparent avenir f6 pointer" value={props.val} onClick={props.updateFilterOption}>
     {props.text}
   </button>
 );
