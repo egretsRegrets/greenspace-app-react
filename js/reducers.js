@@ -11,7 +11,7 @@ const user = (state = { id: '5a3074b72b40d9857018bf07' }, action: Action) => {
   return state;
 };
 
-const greenspacesFilters = (state = initialState.greenspacesFilters, action: Action) => {
+const greenspacesFilters = (state = initialState.filters.greenspaces, action: Action) => {
   if (action.type === SET_GREENSPACES_FILTERS) {
     return Object.assign({}, state, action.payload);
   }
