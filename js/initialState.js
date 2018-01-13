@@ -7,7 +7,7 @@ const initialState = {
 
 initialState.filters.greenspaces = initializeFilterState({
   farmerDesired: ['yes', 'no'],
-  plotSize: ['none', 'largePlot', 'microPlot', 'backyard', 'frontyard', 'fullyard']
+  plotSize: ['initial', 'largePlot', 'microPlot', 'backyard', 'frontyard', 'fullyard']
 });
 
 export default initialState;

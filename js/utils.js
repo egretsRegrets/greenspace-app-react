@@ -94,10 +94,10 @@ const filterFromOption = (option: string, filterState: {}): string | null => {
 
 // for updating a filter with two options, one of which, if true, sets the other to false:
 const updateBinaryFilter = (
-  filter: 'yes' | 'no' | 'any',
+  filter: 'yes' | 'no' | 'initial',
   filtersState: { yes: boolean, no: boolean }
 ): { yes: boolean, no: boolean } => {
-  if (filter === 'any') {
+  if (filter === 'initial') {
     return Object.assign({}, filtersState, { yes: true, no: true });
   }
   if (filter === 'yes') {
@@ -107,13 +107,13 @@ const updateBinaryFilter = (
   return Object.assign({}, filtersState, { yes: false, no: true });
 };
 
-export const updateFilter = (filter: 'any' | string, filtersState: {}, isBinaryFilter: boolean = false): {} => {
+export const updateFilter = (filter: 'initial' | string, filtersState: {}, isBinaryFilter: boolean = false): {} => {
   if (isBinaryFilter) {
     // $FlowFixMe
     return updateBinaryFilter(filter, filtersState);
   }
   // if filter is any, we set all filters to true
-  if (filter === 'any') {
+  if (filter === 'initial') {
     // setting all filters to true
     const changedFiltersState = {};
     Object.keys(filtersState).forEach(key => {
