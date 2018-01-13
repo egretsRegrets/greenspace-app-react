@@ -80,6 +80,7 @@ export const updateFilters = (filter: 'any' | string, filtersState: {}, isBinary
     // $FlowFixMe
     return updateBinaryFilter(filter, filtersState);
   }
+  // if filter is any, we set all filters to true
   if (filter === 'any') {
     // setting all filters to true
     const changedFiltersState = {};
@@ -91,6 +92,17 @@ export const updateFilters = (filter: 'any' | string, filtersState: {}, isBinary
     });
     return Object.assign({}, filtersState, changedFiltersState);
   }
+  // if filtersState.none is true, then a filter btn filters result to only that filter
+  if (filtersState.none) {
+    const changedFiltersState = {};
+    Object.keys(filtersState).forEach(key => {
+      if (key !== filter) {
+        changedFiltersState[key] = false;
+      }
+    });
+    return Object.assign({}, filtersState, changedFiltersState);
+  }
+  // if filtersState.none is not true, filter btns toggle that filter
   // creating single prop object - props with key of filter and opposite value of filter in current filter state
   const newFilter = {};
   // $FlowFixMe
