@@ -145,16 +145,15 @@ export const updateFilter = (filter: 'any' | string, filtersState: {}, isBinaryF
 export const resolveFiltersState = (option: string, filterState: {}): {} => {
   const updatedFilter = filterFromOption(option, filterState);
   if (updatedFilter === null) {
-    // CONSOLE WARNING
+    // if no filter exists that contains the provided option - then the option given is incompatible - check ui element val
+    // CONSOLE WARNING - replace console.error with dev error surfacing in components
     console.error(`the provided option value, ${option}, does not exist in filters: ${JSON.stringify(filterState)}`);
     return filterState;
   }
+  // targetFilter is the filter in filterState that will be updated
+  const targetFilter = filterState[updatedFilter];
   const updatedFiltersState = {};
-  updatedFiltersState[updatedFilter] = updateFilter(
-    option,
-    filterState[updatedFilter],
-    isFilterBinary(filterState[updatedFilter])
-  );
+  updatedFiltersState[updatedFilter] = updateFilter(option, targetFilter, isFilterBinary(targetFilter));
   return Object.assign({}, filterState, updatedFiltersState);
 };
 
