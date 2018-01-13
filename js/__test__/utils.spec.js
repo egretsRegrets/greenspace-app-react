@@ -1,6 +1,6 @@
 // @flow
 
-import { updateFilters, composeFilters } from '../utils';
+import { updateFilterState, composeFilters } from '../utils';
 
 const farmerDesiredFilter = {
   initial: {
@@ -18,27 +18,27 @@ const farmerDesiredFilter = {
 };
 
 // tests binary filter - user selecting btn with 'any' value
-test('updateFilters with binaryFilters - test for value = any', () => {
+test('updateFilterState with binaryFilters - test for value = any', () => {
   // initial state
-  expect(updateFilters('any', farmerDesiredFilter.initial, true)).toEqual(farmerDesiredFilter.initial);
-  expect(updateFilters('any', farmerDesiredFilter.yes, true)).toEqual(farmerDesiredFilter.initial);
-  expect(updateFilters('any', farmerDesiredFilter.no, true)).toEqual(farmerDesiredFilter.initial);
+  expect(updateFilterState('any', farmerDesiredFilter.initial, true)).toEqual(farmerDesiredFilter.initial);
+  expect(updateFilterState('any', farmerDesiredFilter.yes, true)).toEqual(farmerDesiredFilter.initial);
+  expect(updateFilterState('any', farmerDesiredFilter.no, true)).toEqual(farmerDesiredFilter.initial);
 });
 
 // tests binary filter - user selecting btn with 'yes' value
-test('updateFilters with binaryFilters - test for value = yes', () => {
+test('updateFilterState with binaryFilters - test for value = yes', () => {
   // initial state
-  expect(updateFilters('yes', farmerDesiredFilter.initial, true)).toEqual(farmerDesiredFilter.yes);
-  expect(updateFilters('yes', farmerDesiredFilter.yes, true)).toEqual(farmerDesiredFilter.yes);
-  expect(updateFilters('yes', farmerDesiredFilter.no, true)).toEqual(farmerDesiredFilter.yes);
+  expect(updateFilterState('yes', farmerDesiredFilter.initial, true)).toEqual(farmerDesiredFilter.yes);
+  expect(updateFilterState('yes', farmerDesiredFilter.yes, true)).toEqual(farmerDesiredFilter.yes);
+  expect(updateFilterState('yes', farmerDesiredFilter.no, true)).toEqual(farmerDesiredFilter.yes);
 });
 
 // tests binary filter - user selecting btn with 'yes' value
-test('updateFilters with binaryFilters - test for value = no', () => {
+test('updateFilterState with binaryFilters - test for value = no', () => {
   // initial state
-  expect(updateFilters('no', farmerDesiredFilter.initial, true)).toEqual(farmerDesiredFilter.no);
-  expect(updateFilters('no', farmerDesiredFilter.yes, true)).toEqual(farmerDesiredFilter.no);
-  expect(updateFilters('no', farmerDesiredFilter.no, true)).toEqual(farmerDesiredFilter.no);
+  expect(updateFilterState('no', farmerDesiredFilter.initial, true)).toEqual(farmerDesiredFilter.no);
+  expect(updateFilterState('no', farmerDesiredFilter.yes, true)).toEqual(farmerDesiredFilter.no);
+  expect(updateFilterState('no', farmerDesiredFilter.no, true)).toEqual(farmerDesiredFilter.no);
 });
 
 // test general/non-binary filter
@@ -69,20 +69,20 @@ const exampGeneralFilters = {
   }
 };
 
-test('updateFilters with non-binary: filter1 selected from initial state', () => {
-  expect(updateFilters('filter1', exampGeneralFilters.initial)).toEqual(exampGeneralFilters.fromInitialSel1);
+test('updateFilterState with non-binary: filter1 selected from initial state', () => {
+  expect(updateFilterState('filter1', exampGeneralFilters.initial)).toEqual(exampGeneralFilters.fromInitialSel1);
 });
 
-test('updateFilters with non-binary: filter2 selected from filter1 already selected', () => {
-  expect(updateFilters('filter2', exampGeneralFilters.fromInitialSel1)).toEqual(exampGeneralFilters.from1Sel2);
+test('updateFilterState with non-binary: filter2 selected from filter1 already selected', () => {
+  expect(updateFilterState('filter2', exampGeneralFilters.fromInitialSel1)).toEqual(exampGeneralFilters.from1Sel2);
 });
 
-test('updateFilters with non-binary: filter2 selected from filter1 and filter2 already selected', () => {
-  expect(updateFilters('filter2', exampGeneralFilters.from1Sel2)).toEqual(exampGeneralFilters.from2And1Sel2);
+test('updateFilterState with non-binary: filter2 selected from filter1 and filter2 already selected', () => {
+  expect(updateFilterState('filter2', exampGeneralFilters.from1Sel2)).toEqual(exampGeneralFilters.from2And1Sel2);
 });
 
-test('updateFilters with non-binary: any selected from filter1 and filter2 already selected', () => {
-  expect(updateFilters('any', exampGeneralFilters.from1Sel2)).toEqual(exampGeneralFilters.initial);
+test('updateFilterState with non-binary: any selected from filter1 and filter2 already selected', () => {
+  expect(updateFilterState('any', exampGeneralFilters.from1Sel2)).toEqual(exampGeneralFilters.initial);
 });
 
 // testing composeFilters
@@ -118,8 +118,8 @@ test('composeFilters with one binary filter, one non-binary', () => {
     composeFilters(
       ['nonBinary', 'binary'],
       [
-        updateFilters('filter3', exampGeneralFilters.fromInitialSel1),
-        updateFilters('yes', farmerDesiredFilter.no, true)
+        updateFilterState('filter3', exampGeneralFilters.fromInitialSel1),
+        updateFilterState('yes', farmerDesiredFilter.no, true)
       ],
       preComposeFilters
     )
