@@ -1,19 +1,13 @@
+// @flow
+import { initializeFilterState } from './utils';
+
 const initialState = {
-  greenspacesFilters: {
-    plotSize: {
-      any: true,
-      largePlot: false,
-      microPlot: false,
-      backYard: false,
-      frontYard: false,
-      fullYard: false
-    },
-    seekingFarmer: {
-      either: true,
-      yes: false,
-      no: false
-    }
-  }
+  filters: {}
 };
+
+initialState.filters.greenspaces = initializeFilterState({
+  farmerDesired: ['yes', 'no'],
+  plotSize: ['none', 'largePlot', 'microPlot', 'backyard', 'frontyard', 'fullyard']
+});
 
 export default initialState;
