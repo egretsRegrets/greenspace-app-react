@@ -80,18 +80,17 @@ export type GreenspaceOwnerBrief = {
 // action types for reducers
 
 export type greenspacesFilters = {
-  plotSize: {
-    Any: boolean,
-    largePlot: boolean,
-    microPlot: boolean,
-    backYard: boolean,
-    frontYard: boolean,
-    fullYard: boolean
-  },
-  seekingFarmer: {
-    either: boolean,
+  farmerDesired: {
     yes: boolean,
     no: boolean
+  },
+  plotSize: {
+    initial: boolean,
+    largePlot: boolean,
+    microPlot: boolean,
+    backyard: boolean,
+    frontyard: boolean,
+    fullyard: boolean
   }
 };
 
