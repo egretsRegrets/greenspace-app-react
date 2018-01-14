@@ -15,6 +15,12 @@ const FilterButtonRow = (props: {
   // pass filterValue and target filter up to parent
   const passFilterValue = event => props.changeFilter(event.target.value, props.filter);
   const filterStateVals = Object.keys(props.filterState).map((filterKey: string) => props.filterState[filterKey]);
+  const genFilterSelectedTest = filter => {
+    // $FlowFixMe
+    if (filter === 'initial') return props.filterState[filter];
+    return props.filterState[filter] && !props.filterState[props.filterOptions[1]];
+  };
+  const binaryFilterSelectedTest = filter => props.filterState[filter] && filterStateVals.includes(false);
   const binaryBothBtn = (
     <FilterButton
       filterSelected={!filterStateVals.includes(false)}
@@ -29,7 +35,7 @@ const FilterButtonRow = (props: {
       {props.includesBinaryBoth ? binaryBothBtn : null}
       {props.filterOptions.map((filter: string, index) => (
         <FilterButton
-          filterSelected={props.filterState[filter]}
+          filterSelected={props.includesBinaryBoth ? binaryFilterSelectedTest(filter) : genFilterSelectedTest(filter)}
           key={filter}
           val={filter}
           // $FlowFixMe - possibly undefined value sufficiently covered by defaultProps
