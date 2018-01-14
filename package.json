@@ -17,6 +17,7 @@
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
+    "styled-components": "^2.4.0",
     "webpack": "^3.10.0"
   },
   "devDependencies": {
@@ -51,8 +52,7 @@
   },
   "name": "greenspace-app-react",
   "version": "0.1.0",
-  "description":
-    "Application connects owners of plots of open residential land - greenspaces - with small-scale farmers looking for plots to farm on - React implementation",
+  "description": "Application connects owners of plots of open residential land - greenspaces - with small-scale farmers looking for plots to farm on - React implementation",
   "repository": "git@github.com:mercantilism/greenspace-app-react.git",
   "author": "Sam Gardner <samuel.galen.gardner@gmail.com>",
   "license": "MIT"
