@@ -18,7 +18,7 @@ const FilterButtonRow = (props: {
   const genFilterSelectedTest = filter => {
     // $FlowFixMe
     if (filter === 'initial') return props.filterState[filter];
-    return props.filterState[filter] && !props.filterState[props.filterOptions[1]];
+    return props.filterState[filter] && !props.filterState[props.filterOptions[0]];
   };
   const binaryFilterSelectedTest = filter => props.filterState[filter] && filterStateVals.includes(false);
   const binaryBothBtn = (
