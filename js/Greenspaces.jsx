@@ -94,6 +94,7 @@ class Greenspaces extends Component {
                 </button>
                 <FilterButtonRow
                   filter="plotSize"
+                  filterState={this.props.filters.plotSize}
                   filterOptions={Object.keys(this.props.filters.plotSize)}
                   changeFilter={this.updateFilterOption}
                   btnTextArr={btnTxtPlotSize}
@@ -105,6 +106,7 @@ class Greenspaces extends Component {
                 </button>
                 <FilterButtonRow
                   filter="farmerDesired"
+                  filterState={this.props.filters.farmerDesired}
                   filterOptions={Object.keys(this.props.filters.farmerDesired)}
                   changeFilter={this.updateFilterOption}
                   btnTextArr={['Yes', 'No']}
