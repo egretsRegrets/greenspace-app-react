@@ -77,6 +77,10 @@ export type GreenspaceOwnerBrief = {
   desiredLandOwnerParticipation?: landOwnerParticipationLevels
 };
 
+// types for filters
+
+export type Filters = 'greenspaces';
+
 // action types for reducers
 
 export type greenspacesFilters = {
