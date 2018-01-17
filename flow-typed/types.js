@@ -81,6 +81,25 @@ export type GreenspaceOwnerBrief = {
 
 export type Filters = 'greenspaces';
 
+declare type FilterReducers = 'greenspaces';
+
+declare type FilterActions = 'setGreenspacesFilters';
+
+export type FiltersProps = {
+  [filterCat: string]: {
+    filters: Array<string>,
+    titles: Array<string>,
+    reducer: FilterReducers,
+    action: FilterActions,
+    optionsTxt?: Array<Array<string>>,
+    binaryFilters?: Array<string>,
+    binaryFilterProps?: Array<{
+      filter: string,
+      btnText?: string
+    }>
+  }
+};
+
 // action types for reducers
 
 export type greenspacesFilters = {
