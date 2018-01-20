@@ -1,6 +1,7 @@
 // @flow
 
-declare var module: {
+declare
+var module: {
   hot: {
     accept(path: string, callback: () => void): void
   }
@@ -25,16 +26,16 @@ export type Greenspace = {
 };
 
 declare type farmingExperienceLevel = 'expert' | 'intermediate' | 'novice';
-export type farmingSkills =
-  | 'Fruits'
-  | 'Vegetables'
-  | 'Herbs'
-  | 'Farming Education'
-  | 'Home Gardening'
-  | 'Sustainability'
-  | 'Organic'
-  | 'CSA'
-  | 'Farmers Market';
+export type farmingSkills = |
+  'Fruits' |
+  'Vegetables' |
+  'Herbs' |
+  'Farming Education' |
+  'Home Gardening' |
+  'Sustainability' |
+  'Organic' |
+  'CSA' |
+  'Farmers Market';
 declare type landOwnerParticipationLevels = 'hands-off' | 'helping hand' | 'co-farmer';
 
 export type User = {
@@ -81,23 +82,25 @@ export type GreenspaceOwnerBrief = {
 
 export type Filters = 'greenspaces';
 
-declare type FilterReducers = 'greenspaces';
-
-declare type FilterActions = 'setGreenspacesFilters';
+export type FilterProp = {
+  filters: Array<string>,
+  titles: Array<string>,
+  options: {
+    [filter: string]: Array<string>
+  },
+  optionsText?: {
+    [filter: string]: Array<string>
+  },
+  binaryFilters?: Array<string>,
+  binaryFilterProps?: {
+    [binaryFilter: string]: {
+      btnText: string
+    }
+  }
+}
 
 export type FiltersProps = {
-  [filterCat: string]: {
-    filters: Array<string>,
-    titles: Array<string>,
-    reducer: FilterReducers,
-    action: FilterActions,
-    optionsTxt?: Array<Array<string>>,
-    binaryFilters?: Array<string>,
-    binaryFilterProps?: Array<{
-      filter: string,
-      btnText?: string
-    }>
-  }
+  [filterCat: string]: FilterProp
 };
 
 // action types for reducers
@@ -119,9 +122,9 @@ export type greenspacesFilters = {
 
 declare type ActionType = 'SET_GREENSPACES_FILTERS';
 
-declare type ActionT<A: ActionType, P> = {|
+declare type ActionT < A: ActionType, P > = {|
   type: A,
-  payload: P
+  payload: P 
 |};
 
-export type Action = ActionT<'SET_GREENSPACES_FILTERS', greenspacesFilters>;
+export type Action = ActionT<'SET_GREENSPACES_FILTERS', greenspacesFilters> ;
