@@ -8,7 +8,8 @@
     "test": "jest"
   },
   "jest": {
-    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
+    "snapshotSerializers": ["enzyme-to-json/serializer"]
   },
   "dependencies": {
     "babel-plugin-dynamic-import-webpack": "^1.0.2",
@@ -36,6 +37,7 @@
     "css-loader": "^0.28.7",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.0",
     "eslint": "^4.12.1",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-prettier": "^2.9.0",
@@ -58,7 +60,8 @@
   },
   "name": "greenspace-app-react",
   "version": "0.1.0",
-  "description": "Application connects owners of plots of open residential land - greenspaces - with small-scale farmers looking for plots to farm on - React implementation",
+  "description":
+    "Application connects owners of plots of open residential land - greenspaces - with small-scale farmers looking for plots to farm on - React implementation",
   "repository": "git@github.com:mercantilism/greenspace-app-react.git",
   "author": "Sam Gardner <samuel.galen.gardner@gmail.com>",
   "license": "MIT"
