@@ -164,3 +164,38 @@ export const composeFilters = (filterNames: Array<string>, filterStates: Array<{
   });
   return Object.assign({}, currentFilters, newFilters);
 };
+
+/**
+ * return value of optional computed object property
+ * @param {Object<any>} baseObject - the base object to test props against
+ * @param {Array<string>} propNames - array of nested props that could exist on base object, if 1 prop provided, will return val of that prop, if 2 props, will return value of second prop within first prop, etc.
+ * @param {boolean} undefinedIfNoProp - if true - if prop does not exist return undefined - otherwise return null; this is for use when returning directly in JSX component prop assignment
+ */
+
+export const optionalComputedPropVal = (baseObj: any, propNames: Array<string>, undefinedIfNoProp: boolean = false) => {
+  const noProp = undefinedIfNoProp ? undefined : null;
+  // we're always going to test the base object against the 0'th index of propNames, so here's a shorthand
+  const hasPropShorthand = () => {
+    if (Object.prototype.hasOwnProperty.call(baseObj, propNames[0])) {
+      return true;
+    }
+    return false;
+  };
+
+  if (propNames.length === 1) {
+    // if we only have one prop to test - we return value of baseObj[deepestProperty] if test passes; on fail we return noProp val
+    if (hasPropShorthand()) {
+      return baseObj[propNames[0]];
+    }
+    return noProp;
+  }
+
+  if (hasPropShorthand()) {
+    // If we have more than one propName and the baseObj has propNames[0], we re-run the function with baseObj[propNames[0]] as the new base object,
+    // we slice propNames by just the first index to return a property list without the first property we've made the new baseObj with
+    // and we pass the undefinedIfNoProp val along as is.
+    return optionalComputedPropVal(baseObj[propNames[0]], propNames.slice(1), undefinedIfNoProp);
+  }
+
+  return noProp;
+};
