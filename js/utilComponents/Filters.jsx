@@ -36,7 +36,7 @@ const Filters = (props: { filterCat: string, filters: {}, updateOptions: Functio
 
   const filterRowProps = FilterCatProps[props.filterCat];
   const filterGroup = (filterRow: any, filterTitle: string) => (
-    <div className="mr4 flex justify-start">
+    <div key="filterTitle" className="mr4 flex justify-start">
       <button className="mr3 pl1 pr3 pv1 bg-transparent bt-0 br-0 bb bl-0 bw2 b--green fw6 f5 avenir tl pointer">
         {filterTitle}
       </button>
@@ -45,6 +45,7 @@ const Filters = (props: { filterCat: string, filters: {}, updateOptions: Functio
   );
   const filterRow = (filter: string) => (
     <FilterButtonRow
+      key={filter}
       filter={filter}
       filterState={props.filters[filter]}
       filterOptions={filterRowProps.options[filter]}
