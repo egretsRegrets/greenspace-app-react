@@ -1,9 +1,13 @@
 // @flow
 
-import SET_GREENSPACES_FILTERS from './actions';
+import { SET_GREENSPACES_FILTERS, SET_FARMERS_FILTERS } from './actions';
 
-function setGreenspacesFilters(greenspacesFilters: greenspacesFilters) {
-  return { type: SET_GREENSPACES_FILTERS, payload: greenspacesFilters };
-}
+export const setGreenspacesFilters = (greenspacesFilters: greenspacesFilters) => ({
+  type: SET_GREENSPACES_FILTERS,
+  payload: greenspacesFilters
+});
 
-export default setGreenspacesFilters;
+export const setFarmersFilters = (farmersFilters: genFilters) => ({
+  type: SET_FARMERS_FILTERS,
+  payload: farmersFilters
+});
