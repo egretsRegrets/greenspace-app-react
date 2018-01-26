@@ -94,13 +94,24 @@ function filterFromOption (option: string, filterState: {}): string | null {
 };
 */
 
+const turnFiltersOff = (filters: { [filter: string]: string } | { yes: boolean, no: boolean }) => {
+  const updatedFilters = {};
+  Object.keys(filters).forEach(key => {
+    // only add/set prop if prop is not already true
+    if (!filters[key]) {
+      updatedFilters[key] = true;
+    }
+  });
+  return Object.assign({}, filters, updatedFilters);
+};
+
 // for updating a filter with two options, one of which, if true, sets the other to false:
 const updateBinaryFilter = (
   filter: 'yes' | 'no' | 'binaryBoth',
   filtersState: { yes: boolean, no: boolean }
 ): { yes: boolean, no: boolean } => {
   if (filter === 'binaryBoth') {
-    return Object.assign({}, filtersState, { yes: true, no: true });
+    return turnFiltersOff(filtersState);
   }
   if (filter === 'yes') {
     return Object.assign({}, filtersState, { yes: true, no: false });
@@ -109,7 +120,11 @@ const updateBinaryFilter = (
   return Object.assign({}, filtersState, { yes: false, no: true });
 };
 
-export const updateFilter = (filter: 'initial' | string, filtersState: {}, isBinaryFilter: boolean = false): {} => {
+export const updateFilter = (
+  filter: 'initial' | string,
+  filtersState: { [filter: string]: string },
+  isBinaryFilter: boolean = false
+): {} => {
   if (isBinaryFilter) {
     // $FlowFixMe
     return updateBinaryFilter(filter, filtersState);
@@ -117,14 +132,7 @@ export const updateFilter = (filter: 'initial' | string, filtersState: {}, isBin
   // if filter is any, we set all filters to true
   if (filter === 'initial') {
     // setting all filters to true
-    const changedFiltersState = {};
-    Object.keys(filtersState).forEach(key => {
-      // only add/set prop if prop is not already true
-      if (!filtersState[key]) {
-        changedFiltersState[key] = true;
-      }
-    });
-    return Object.assign({}, filtersState, changedFiltersState);
+    return turnFiltersOff(filtersState);
   }
   // if filtersState.initial is true, then a filter btn filters result to only that filter
   if (filtersState.initial) {
@@ -135,6 +143,11 @@ export const updateFilter = (filter: 'initial' | string, filtersState: {}, isBin
       }
     });
     return Object.assign({}, filtersState, changedFiltersState);
+  }
+  // if the current filter - which isn't initial - is the only true/on filter, if we toggle it off then let's return to initial state
+  // - this prevents filtering down to no results:
+  if (Object.values(filtersState).filter(filterVal => filterVal).length === 1 && filtersState[filter]) {
+    return turnFiltersOff(filtersState);
   }
   // if filtersState.initial is not true, filter btns toggle that filter
   // creating single prop object - props with key of filter and opposite value of filter in current filter state
@@ -172,7 +185,11 @@ export const composeFilters = (filterNames: Array<string>, filterStates: Array<{
  * @param {boolean} undefinedIfNoProp - if true - if prop does not exist return undefined - otherwise return null; this is for use when returning directly in JSX component prop assignment
  */
 
-export const optionalComputedPropVal = (baseObj: any, propNames: Array<string>, undefinedIfNoProp: boolean = false) => {
+export const optionalComputedPropVal = (
+  baseObj: any,
+  propNames: Array<string>,
+  undefinedIfNoProp: boolean = false
+): any | null | typeof undefined => {
   const noProp = undefinedIfNoProp ? undefined : null;
   // we're always going to test the base object against the 0'th index of propNames, so here's a shorthand
   const hasPropShorthand = () => {
