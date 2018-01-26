@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import setGreenspacesFilters from './actionCreators';
+import { setGreenspacesFilters } from './actionCreators';
 import GreenspaceCardList from './GreenspaceCardList';
 import Filters from './utilComponents/Filters';
 import { NextPreviousBtns } from './utilComponents/PageControls';
