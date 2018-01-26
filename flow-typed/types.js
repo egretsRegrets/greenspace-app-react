@@ -29,15 +29,15 @@ export type Greenspace = {
 
 declare type farmingExperienceLevel = 'expert' | 'intermediate' | 'novice';
 export type farmingSkills = |
-  'Fruits' |
-  'Vegetables' |
-  'Herbs' |
-  'Farming Education' |
-  'Home Gardening' |
-  'Sustainability' |
-  'Organic' |
+  'fruits' |
+  'vegetables' |
+  'herbs' |
+  'farming education' |
+  'home gardening' |
+  'sustainability' |
+  'organic' |
   'CSA' |
-  'Farmers Market';
+  'farmers market';
 declare type landOwnerParticipationLevels = 'hands-off' | 'helping hand' | 'co-farmer';
 
 export type User = {
