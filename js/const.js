@@ -39,15 +39,15 @@ const FilterCatProps: FiltersProps = {
     optionsText: {
       experience: ['Expert,', 'Intermediate,', 'Novice'],
       skills: [
-        'fruits',
-        'vegetables',
-        'herbs',
-        'farming education',
-        'home gardening',
-        'sustainability',
-        'organic',
-        'CSA',
-        'farmers market'
+        'Fruits,',
+        'Vegetables,',
+        'Herbs,',
+        'Farming Education,',
+        'Home Gardening,',
+        'Sustainability,',
+        'Organic,',
+        'CSA,',
+        'Farmers Market'
       ]
     }
   }
