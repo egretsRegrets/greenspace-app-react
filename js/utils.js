@@ -157,7 +157,11 @@ export const updateFilter = (
   return Object.assign({}, filtersState, newFilter);
 };
 
-export const resolveFiltersState = (option: string, targetFilterName: string, filterState: {}): {} => {
+export const resolveFiltersState = (
+  option: string,
+  targetFilterName: string,
+  filterState: { [filterType: string]: { [filter: string]: string } }
+): {} => {
   const targetFilter = filterState[targetFilterName];
   const updatedFiltersState = {};
   updatedFiltersState[targetFilterName] = updateFilter(option, targetFilter, isFilterBinary(targetFilter));
@@ -170,7 +174,11 @@ export const resolveFiltersState = (option: string, targetFilterName: string, fi
  * @param {Array<{any}>} filterStates - the states of each filter in return filters obj, should be in same ordered as filterNames
  * @param {Object<any>} currentFilters - the current state of view/component filters - optional
  */
-export const composeFilters = (filterNames: Array<string>, filterStates: Array<{}>, currentFilters: {} = {}): {} => {
+export const composeFilters = (
+  filterNames: Array<string>,
+  filterStates: Array<{ [filterType: string]: { [filter: string]: string } }>,
+  currentFilters: {} = {}
+): {} => {
   const newFilters = {};
   filterNames.forEach((name: string, index: number) => {
     newFilters[name] = filterStates[index];
