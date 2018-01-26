@@ -1,5 +1,7 @@
 // @flow
 
+import {SET_GREENSPACES_FILTERS, SET_FARMERS_FILTERS} from '../js/actions';
+
 declare
 var module: {
   hot: {
@@ -105,6 +107,12 @@ export type FiltersProps = {
 
 // action types for reducers
 
+export type genFilters = {
+  [filterType: string]: {
+    [filter: string]: boolean
+  }
+}
+
 export type greenspacesFilters = {
   farmerDesired: {
     yes: boolean,
@@ -120,11 +128,12 @@ export type greenspacesFilters = {
   }
 };
 
-declare type ActionType = 'SET_GREENSPACES_FILTERS';
+// declare type ActionType = 'SET_GREENSPACES_FILTERS' | 'SET_FARMERS_FILTERS';
+declare type ActionType = SET_GREENSPACES_FILTERS | SET_FARMERS_FILTERS;
 
 declare type ActionT < A: ActionType, P > = {|
   type: A,
   payload: P 
 |};
 
-export type Action = ActionT<'SET_GREENSPACES_FILTERS', greenspacesFilters> ;
+export type Action = ActionT<SET_GREENSPACES_FILTERS, greenspacesFilters> | ActionT<SET_FARMERS_FILTERS, genFilters> ;
