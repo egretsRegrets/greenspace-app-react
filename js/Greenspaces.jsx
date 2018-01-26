@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import setGreenspacesFilters from './actionCreators';
 import GreenspaceCardList from './GreenspaceCardList';
-import FilterButtonRow from './utilComponents/FilterButtonRow';
+import Filters from './utilComponents/Filters';
 import { NextPreviousBtns } from './utilComponents/PageControls';
 import { resolveFiltersState } from './utils';
 
@@ -30,7 +30,8 @@ class Greenspaces extends Component {
     // $FlowFixMe
     this.setState({ pageNumber: parseInt(val, 10) });
 
-  updateFilterOption = (option: string, filter: string) => this.props.setFilters(option, filter, this.props.filters);
+  updateFilterOption = (option: string, filter: string, filterState: {}) =>
+    this.props.setFilters(option, filter, filterState);
 
   passesPlotSizeFilters = (plotSizeTags: Array<greenspaceTags>): boolean => {
     if (this.props.filters.plotSize.any === true) {
@@ -67,56 +68,9 @@ class Greenspaces extends Component {
 
   render() {
     const cardsPerPage = 8;
-    const btnTxtPlotSize = ['Any', 'Large Plot', 'Micro Plot', 'Backyard', 'Frontyard', 'Full Yard'];
     return (
       <section>
-        <div className="pt4 pb0">
-          <div className="ph5">
-            <button
-              className="bt-0 br-0 bb-0 bl-0 bg-transparent pointer flex justify-start items-center"
-              style={{ paddingLeft: '0' }}
-            >
-              <h3 className="mr2 f3 fw6 bw0 avenir near-black">Filters</h3>
-              <svg
-                className="w1 near-black"
-                data-icon="chevronDown"
-                viewBox="0 0 32 32"
-                style={{ fill: 'currentcolor' }}
-              >
-                <title>chevronDown icon</title>
-                <path d="M1 18 L5 14 L16 24 L27 14 L31 18 L16 32 Z" />
-              </svg>
-            </button>
-            <div className="flex items-center">
-              <div className="mr4 flex justify-start">
-                <button className="mr3 pl1 pr3 pv1 bg-transparent bt-0 br-0 bb bl-0 bw2 b--green fw6 f5 avenir tl pointer">
-                  Plot Size
-                </button>
-                <FilterButtonRow
-                  filter="plotSize"
-                  filterState={this.props.filters.plotSize}
-                  filterOptions={Object.keys(this.props.filters.plotSize)}
-                  changeFilter={this.updateFilterOption}
-                  btnTextArr={btnTxtPlotSize}
-                />
-              </div>
-              <div className="mr4 flex justify-start">
-                <button className="mr3 pl1 pr3 pv1 bg-transparent bt-0 br-0 bb bl-0 bw2 b--green fw6 f5 avenir tl pointer">
-                  Seeking Farmers
-                </button>
-                <FilterButtonRow
-                  filter="farmerDesired"
-                  filterState={this.props.filters.farmerDesired}
-                  filterOptions={Object.keys(this.props.filters.farmerDesired)}
-                  changeFilter={this.updateFilterOption}
-                  btnTextArr={['Yes', 'No']}
-                  includesBinaryBoth
-                  binaryBothBtnText="Either"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+        <Filters filterCat="greenspaces" filters={this.props.filters} updateOptions={this.updateFilterOption} />
         <GreenspaceCardList
           greenspaceCardList={this.props.greenspaces.filter(
             (greenspace: Greenspace) =>
