@@ -3,33 +3,17 @@
 import React from 'react';
 import FilterCatProps from '../const';
 import FilterButtonRow from './FilterButtonRow';
+import { optionalComputedPropVal } from '../utils';
 
 const Filters = (props: { filterCat: string, filters: {}, updateOptions: Function }) => {
   const passOptionState = (option: string, filter: string) => props.updateOptions(option, filter, props.filters);
-  const getOptionsText = (filter: string, filterRowProps: FilterProp) => {
-    if (Object.prototype.hasOwnProperty.call(filterRowProps, 'optionsText')) {
-      if (Object.prototype.hasOwnProperty.call(filterRowProps.optionsText, filter)) {
-        // $FlowFixMe - first check will guarantee that computed prop filterRowProps.optionsText will have prop [filter]
-        return filterRowProps.optionsText[filter];
-      }
-    }
-    return undefined;
-  };
-  const getBinaryBtnText = (filter: string, filterRowProps: FilterProp) => {
-    if (Object.prototype.hasOwnProperty.call(filterRowProps, 'binaryFilterProps')) {
-      if (Object.prototype.hasOwnProperty.call(filterRowProps.binaryFilterProps, filter)) {
-        // $FlowFixMe - first check will guarantee that computed prop filterRowProps.optionsText will have prop [filter]
-        return filterRowProps.binaryFilterProps[filter].btnText;
-      }
-    }
-    return undefined;
-  };
   const filterIsBinary = (filter: string, filterRowProps: FilterProp) => {
-    if (Object.prototype.hasOwnProperty.call(filterRowProps, 'binaryFilters')) {
-      // $FlowFixMe - previous test insures filterRowProps.binaryFilters !== undefined
-      if (filterRowProps.binaryFilters.includes(filter)) {
-        return true;
-      }
+    if (
+      optionalComputedPropVal(filterRowProps, ['binaryFilters']) &&
+      // $FlowFixMe - first check negates possibility of reaching this line if optionalComputedPropVal(filterRowProps, ['binaryFilters']) returns null
+      optionalComputedPropVal(filterRowProps, ['binaryFilters']).includes(filter)
+    ) {
+      return true;
     }
     return undefined;
   };
@@ -50,9 +34,11 @@ const Filters = (props: { filterCat: string, filters: {}, updateOptions: Functio
       filterState={props.filters[filter]}
       filterOptions={filterRowProps.options[filter]}
       changeFilter={passOptionState}
-      btnTextArr={getOptionsText(filter, filterRowProps)}
+      // $FlowFixMe - flow doesn't like optionalComputedVal because it can return type any
+      btnTextArr={optionalComputedPropVal(filterRowProps, ['optionsText', filter], true)}
       includesBinaryBoth={filterIsBinary(filter, filterRowProps)}
-      binaryBothBtnText={getBinaryBtnText(filter, filterRowProps)}
+      // $FlowFixMe - flow doesn't like optionalComputedVal because it can return type any
+      binaryBothBtnText={optionalComputedPropVal(filterRowProps, ['binaryFilterProps', filter, 'btnText'], true)}
     />
   );
   const filters = filterRowProps.filters.map((filter: string, index) =>
