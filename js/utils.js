@@ -193,13 +193,8 @@ export const composeFilters = (
  * @param {*} filterState - state of the all filters for the component
  * @param {*} filtersSetter - setter function which sends the evaluated filter state to the dispatcher
  */
-export const passFilterUpdateToSetter = (
-  filter: string,
-  filterType: string,
-  filtersState: genFilters,
-  filtersSetter: Function
-) => {
-  filtersSetter(filter, filterType, filtersState);
+export const passFilterUpdateToSetter = (resolveFiltersParams: resolveFiltersParams, filtersSetter: Function) => {
+  filtersSetter(resolveFiltersParams);
 };
 
 /**
@@ -209,18 +204,10 @@ export const passFilterUpdateToSetter = (
  * @param {*} dispatch - dispatch function to pass: should be 'dispatch' param of mapDispatchToProps
  * @param {*} actionCreator - actionCreator to pass result of resolveFilterParam: should be an exported member of ./actionCreators.js
  */
-export const setFilter = (
-  resolveFilterParams: {
-    filter: string,
-    filterType: string,
-    filterState: genFilters
-  },
-  dispatch: Function,
-  actionCreator: Function
-) => {
+export const setFilter = (resolveFiltersParams: resolveFiltersParams, dispatch: Function, actionCreator: Function) => {
   dispatch(
     actionCreator(
-      resolveFiltersState(resolveFilterParams.filter, resolveFilterParams.filterType, resolveFilterParams.filterState)
+      resolveFiltersState(resolveFiltersParams.filter, resolveFiltersParams.filterType, resolveFiltersParams.filterState)
     )
   );
 };
