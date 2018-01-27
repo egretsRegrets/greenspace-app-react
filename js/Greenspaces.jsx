@@ -100,7 +100,7 @@ class Greenspaces extends Component {
 const mapStateToProps = state => ({ filters: state.greenspacesFilters });
 const mapDispatchToProps = (dispatch: Function) => ({
   filtersSetter(resolveFiltersParams: resolveFiltersParams) {
-    setFilter(resolveFiltersParams, dispatch, setGreenspacesFilters);
+    setFilter(resolveFiltersParams, setGreenspacesFilters, dispatch);
   }
 });
 

@@ -204,10 +204,14 @@ export const passFilterUpdateToSetter = (resolveFiltersParams: resolveFiltersPar
  * @param {*} dispatch - dispatch function to pass: should be 'dispatch' param of mapDispatchToProps
  * @param {*} actionCreator - actionCreator to pass result of resolveFilterParam: should be an exported member of ./actionCreators.js
  */
-export const setFilter = (resolveFiltersParams: resolveFiltersParams, dispatch: Function, actionCreator: Function) => {
+export const setFilter = (resolveFiltersParams: resolveFiltersParams, actionCreator: Function, dispatch: Function) => {
   dispatch(
     actionCreator(
-      resolveFiltersState(resolveFiltersParams.filter, resolveFiltersParams.filterType, resolveFiltersParams.filterState)
+      resolveFiltersState(
+        resolveFiltersParams.filter,
+        resolveFiltersParams.filterType,
+        resolveFiltersParams.filterState
+      )
     )
   );
 };

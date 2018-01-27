@@ -57,7 +57,7 @@ class Farmers extends Component {
 const mapStateToProps = state => ({ filters: state.farmersFilters });
 const mapDispatchToProps = (dispatch: Function) => ({
   filtersSetter(resolveFiltersParams: resolveFiltersParams) {
-    setFilter(resolveFiltersParams, dispatch, setFarmersFilters);
+    setFilter(resolveFiltersParams, setFarmersFilters, dispatch);
   }
 });
 
