@@ -66,7 +66,7 @@ class Greenspaces extends Component {
   render() {
     const cardsPerPage = 8;
     return (
-      <section>
+      <section className="ph5">
         <Filters
           filterCat="greenspaces"
           filters={this.props.filters}
