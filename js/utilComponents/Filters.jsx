@@ -6,7 +6,8 @@ import FilterButtonRow from './FilterButtonRow';
 import { optionalComputedPropVal } from '../utils';
 
 const Filters = (props: { filterCat: string, filters: {}, updateOptions: Function }) => {
-  const passOptionState = (option: string, filter: string) => props.updateOptions(option, filter, props.filters);
+  const passFilterState = (filter: string, filterType: string) =>
+    props.updateOptions({ filter, filterType, filterState: props.filters });
   const filterIsBinary = (filter: string, filterRowProps: FilterProp) => {
     if (
       optionalComputedPropVal(filterRowProps, ['binaryFilters']) &&
@@ -33,7 +34,7 @@ const Filters = (props: { filterCat: string, filters: {}, updateOptions: Functio
       filter={filter}
       filterState={props.filters[filter]}
       filterOptions={filterRowProps.options[filter]}
-      changeFilter={passOptionState}
+      changeFilter={passFilterState}
       // $FlowFixMe - flow doesn't like optionalComputedVal because it can return type any
       btnTextArr={optionalComputedPropVal(filterRowProps, ['optionsText', filter], true)}
       includesBinaryBoth={filterIsBinary(filter, filterRowProps)}
