@@ -1,8 +1,12 @@
 // @flow
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import FarmerCardList from './FarmerCardList';
+import Filters from './utilComponents/Filters';
 import { NextPreviousBtns } from './utilComponents/PageControls';
+import { passFilterUpdateToSetter, setFilter } from './utils';
+import { setFarmersFilters } from './actionCreators';
 
 // $FlowFixMe
 class Farmers extends Component {
@@ -14,17 +18,20 @@ class Farmers extends Component {
     };
   }
 
-  props: { farmers: Array<FarmerBrief> };
+  props: { farmers: Array<FarmerBrief>, filters: genFilters, filtersSetter: Function };
 
   updatePage = (val: number) =>
     // $FlowFixMe
     this.setState({ pageNumber: parseInt(val, 10) });
+  passFilters = (resolveFiltersParams: resolveFiltersParams) =>
+    passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter);
 
   render() {
     const cardsPerPage = 8;
 
     return (
       <section className="ph5">
+        <Filters filterCat="farmers" filters={this.props.filters} updateOptions={this.passFilters} />
         <FarmerCardList
           farmerCardList={this.props.farmers}
           // $FlowFixMe
@@ -43,4 +50,11 @@ class Farmers extends Component {
   }
 }
 
-export default Farmers;
+const mapStateToProps = state => ({ filters: state.farmersFilters });
+const mapDispatchToProps = (dispatch: Function) => ({
+  filtersSetter(resolveFiltersParams: resolveFiltersParams) {
+    setFilter(resolveFiltersParams, dispatch, setFarmersFilters);
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Farmers);
