@@ -6,7 +6,7 @@ import { setGreenspacesFilters } from './actionCreators';
 import GreenspaceCardList from './GreenspaceCardList';
 import Filters from './utilComponents/Filters';
 import { NextPreviousBtns } from './utilComponents/PageControls';
-import { resolveFiltersState } from './utils';
+import { passFilterUpdateToSetter, setFilter } from './utils';
 
 // $FlowFixMe
 class Greenspaces extends Component {
@@ -21,7 +21,7 @@ class Greenspaces extends Component {
   props: {
     greenspaces: Array<Greenspace>,
     filters: greenspacesFilters,
-    setFilters: Function
+    filtersSetter: Function
   };
 
   gsFilterNameCorrection = ['large plot', 'micro plot', 'backyard', 'front-yard', 'full-yard'];
@@ -30,8 +30,8 @@ class Greenspaces extends Component {
     // $FlowFixMe
     this.setState({ pageNumber: parseInt(val, 10) });
 
-  updateFilterOption = (option: string, filter: string, filterState: {}) =>
-    this.props.setFilters(option, filter, filterState);
+  passFilters = (resolveFiltersParams: resolveFiltersParams) =>
+    passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter);
 
   passesPlotSizeFilters = (plotSizeTags: Array<greenspaceTags>): boolean => {
     if (this.props.filters.plotSize.any === true) {
@@ -70,7 +70,7 @@ class Greenspaces extends Component {
     const cardsPerPage = 8;
     return (
       <section>
-        <Filters filterCat="greenspaces" filters={this.props.filters} updateOptions={this.updateFilterOption} />
+        <Filters filterCat="greenspaces" filters={this.props.filters} updateOptions={this.passFilters} />
         <GreenspaceCardList
           greenspaceCardList={this.props.greenspaces.filter(
             (greenspace: Greenspace) =>
@@ -96,9 +96,8 @@ class Greenspaces extends Component {
 
 const mapStateToProps = state => ({ filters: state.greenspacesFilters });
 const mapDispatchToProps = (dispatch: Function) => ({
-  setFilters(option, filter, filters) {
-    // $FlowFixMe - warning as resolveFiltersState does not explicitly return type greenspacesFilters
-    dispatch(setGreenspacesFilters(resolveFiltersState(option, filter, filters)));
+  filtersSetter(resolveFiltersParams: resolveFiltersParams) {
+    setFilter(resolveFiltersParams, dispatch, setGreenspacesFilters);
   }
 });
 
