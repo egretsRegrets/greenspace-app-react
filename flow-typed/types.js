@@ -105,8 +105,6 @@ export type FiltersProps = {
   [filterCat: string]: FilterProp
 };
 
-// action types for reducers
-
 export type genFilters = {
   [filterType: string]: {
     [filter: string]: boolean
@@ -128,7 +126,14 @@ export type greenspacesFilters = {
   }
 };
 
-// declare type ActionType = 'SET_GREENSPACES_FILTERS' | 'SET_FARMERS_FILTERS';
+// shape of params object passed from Filters component through its parent to its to-store-dispatch via resolveFiltersState()
+export type resolveFiltersParams = {
+  filter: string,
+  filterType: string,
+  filterState: genFilters
+}
+
+// action types for reducers
 declare type ActionType = SET_GREENSPACES_FILTERS | SET_FARMERS_FILTERS;
 
 declare type ActionT < A: ActionType, P > = {|
