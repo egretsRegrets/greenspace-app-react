@@ -122,7 +122,7 @@ const updateBinaryFilter = (
 
 export const updateFilter = (
   filter: 'initial' | string,
-  filtersState: { [filter: string]: string },
+  filtersState: { [filter: string]: boolean },
   isBinaryFilter: boolean = false
 ): {} => {
   if (isBinaryFilter) {
@@ -160,9 +160,9 @@ export const updateFilter = (
 export const resolveFiltersState = (
   option: string,
   targetFilterName: string,
-  filterState: { [filterType: string]: { [filter: string]: string } }
+  filterState: { [filterType: string]: { [filter: string]: boolean } }
 ): {} => {
-  const targetFilter = filterState[targetFilterName];
+  const targetFilter: { [filter: string]: boolean } = filterState[targetFilterName];
   const updatedFiltersState = {};
   updatedFiltersState[targetFilterName] = updateFilter(option, targetFilter, isFilterBinary(targetFilter));
   return Object.assign({}, filterState, updatedFiltersState);
@@ -184,6 +184,45 @@ export const composeFilters = (
     newFilters[name] = filterStates[index];
   });
   return Object.assign({}, currentFilters, newFilters);
+};
+
+/**
+ * side-effect only function, passes params needed to setFilter state to the filterSetter supplied
+ * @param {string} filter - the name of the filter being changed
+ * @param {*} filterType - nae of the filter-type or filter-parent of the updated filter
+ * @param {*} filterState - state of the all filters for the component
+ * @param {*} filtersSetter - setter function which sends the evaluated filter state to the dispatcher
+ */
+export const passFilterUpdateToSetter = (
+  filter: string,
+  filterType: string,
+  filtersState: genFilters,
+  filtersSetter: Function
+) => {
+  filtersSetter(filter, filterType, filtersState);
+};
+
+/**
+ * -- generalized prop-to-store dispatch handler, for use in body of mapDispatchToProps
+ * side-effect only function, passes result of resolveFilterState() to provided actionCreator on through provided dispatch()
+ * @param {*} resolveFilterParams - params for resolveFilterState() - a util function
+ * @param {*} dispatch - dispatch function to pass: should be 'dispatch' param of mapDispatchToProps
+ * @param {*} actionCreator - actionCreator to pass result of resolveFilterParam: should be an exported member of ./actionCreators.js
+ */
+export const setFilter = (
+  resolveFilterParams: {
+    filter: string,
+    filterType: string,
+    filterState: genFilters
+  },
+  dispatch: Function,
+  actionCreator: Function
+) => {
+  dispatch(
+    actionCreator(
+      resolveFiltersState(resolveFilterParams.filter, resolveFilterParams.filterType, resolveFilterParams.filterState)
+    )
+  );
 };
 
 /**
