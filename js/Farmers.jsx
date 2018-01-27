@@ -32,7 +32,7 @@ class Farmers extends Component {
         <Filters
           filterCat="farmers"
           filters={this.props.filters}
-          updateOptions={resolveFiltersParams =>
+          updateFilters={resolveFiltersParams =>
             passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter)
           }
         />

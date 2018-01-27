@@ -5,9 +5,9 @@ import FilterCatProps from '../const';
 import FilterButtonRow from './FilterButtonRow';
 import { optionalComputedPropVal } from '../utils';
 
-const Filters = (props: { filterCat: string, filters: {}, updateOptions: Function }) => {
+const Filters = (props: { filterCat: string, filters: {}, updateFilters: Function }) => {
   const passFilterState = (filter: string, filterType: string) =>
-    props.updateOptions({ filter, filterType, filterState: props.filters });
+    props.updateFilters({ filter, filterType, filterState: props.filters });
   const filterIsBinary = (filter: string, filterRowProps: FilterProp) => {
     if (
       optionalComputedPropVal(filterRowProps, ['binaryFilters']) &&

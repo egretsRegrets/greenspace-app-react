@@ -70,7 +70,7 @@ class Greenspaces extends Component {
         <Filters
           filterCat="greenspaces"
           filters={this.props.filters}
-          updateOptions={resolveFiltersParams =>
+          updateFilters={resolveFiltersParams =>
             passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter)
           }
         />
