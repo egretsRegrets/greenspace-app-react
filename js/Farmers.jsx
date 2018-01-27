@@ -23,15 +23,19 @@ class Farmers extends Component {
   updatePage = (val: number) =>
     // $FlowFixMe
     this.setState({ pageNumber: parseInt(val, 10) });
-  passFilters = (resolveFiltersParams: resolveFiltersParams) =>
-    passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter);
 
   render() {
     const cardsPerPage = 8;
 
     return (
       <section className="ph5">
-        <Filters filterCat="farmers" filters={this.props.filters} updateOptions={this.passFilters} />
+        <Filters
+          filterCat="farmers"
+          filters={this.props.filters}
+          updateOptions={resolveFiltersParams =>
+            passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter)
+          }
+        />
         <FarmerCardList
           farmerCardList={this.props.farmers}
           // $FlowFixMe

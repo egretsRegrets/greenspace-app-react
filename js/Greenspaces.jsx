@@ -30,9 +30,6 @@ class Greenspaces extends Component {
     // $FlowFixMe
     this.setState({ pageNumber: parseInt(val, 10) });
 
-  passFilters = (resolveFiltersParams: resolveFiltersParams) =>
-    passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter);
-
   passesPlotSizeFilters = (plotSizeTags: Array<greenspaceTags>): boolean => {
     if (this.props.filters.plotSize.any === true) {
       return true;
@@ -70,7 +67,13 @@ class Greenspaces extends Component {
     const cardsPerPage = 8;
     return (
       <section>
-        <Filters filterCat="greenspaces" filters={this.props.filters} updateOptions={this.passFilters} />
+        <Filters
+          filterCat="greenspaces"
+          filters={this.props.filters}
+          updateOptions={resolveFiltersParams =>
+            passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter)
+          }
+        />
         <GreenspaceCardList
           greenspaceCardList={this.props.greenspaces.filter(
             (greenspace: Greenspace) =>
