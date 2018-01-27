@@ -13,7 +13,11 @@ const UserGreenspaceView = (props: { greenspaceOwner: GreenspaceOwnerBrief }) =>
   const lendingGreenspacesTitle = (
     <h3 className="mt5 mb0 f3 avenir near-black">{`Greenspaces ${props.greenspaceOwner.userName} is Lending`}</h3>
   );
-  const lendingGreenspacesList = <GreenspaceCardList greenspaceCardList={ownedGreenspaces} />;
+  const lendingGreenspacesList = (
+    <div className="ph5">
+      <GreenspaceCardList greenspaceCardList={ownedGreenspaces} />
+    </div>
+  );
   let landownerParticipationInfo;
   let participationColor = 'green';
   if (props.greenspaceOwner.desiredLandOwnerParticipation) {

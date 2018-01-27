@@ -12,7 +12,11 @@ const UserFarmingView = (props: { farmer: FarmerBrief }) => {
   const farmingGreenspacesTitle = (
     <h3 className="mt5 mb0 f3 avenir near-black">{`Greenspaces ${props.farmer.userName} is Farming`}</h3>
   );
-  const farmingGreenspacesList = <GreenspaceCardList greenspaceCardList={farmingGreenspaces} />;
+  const farmingGreenspacesList = (
+    <div className="ph5">
+      <GreenspaceCardList greenspaceCardList={farmingGreenspaces} />
+    </div>
+  );
   let farmingSkillList;
   let experienceOutlineColor: string;
   if (props.farmer.skills) {
