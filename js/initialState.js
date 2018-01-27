@@ -11,8 +11,9 @@ initialState.filters.greenspaces = initializeFilterState({
 });
 
 initialState.filters.farmers = initializeFilterState({
-  experience: ['expert', 'intermediate', 'novice'],
+  experience: ['initial', 'expert', 'intermediate', 'novice'],
   skills: [
+    'initial',
     'fruits',
     'vegetables',
     'herbs',
