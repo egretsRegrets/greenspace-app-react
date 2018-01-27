@@ -6,8 +6,8 @@ import { paginationSlice } from './utils';
 
 const GreenspaceCardList = (props: {
   greenspaceCardList: Array<Greenspace>,
-  currentPageNumber: number | null,
-  cardsPerPage: number | null
+  currentPageNumber?: number | null,
+  cardsPerPage?: number | null
 }) => (
   <section className="flex flex-wrap justify-start pv4">
     {/* 
@@ -23,5 +23,10 @@ const GreenspaceCardList = (props: {
         ))}
   </section>
 );
+
+GreenspaceCardList.defaultProps = {
+  currentPageNumber: null,
+  cardsPerPage: null
+};
 
 export default GreenspaceCardList;
