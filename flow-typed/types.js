@@ -27,7 +27,7 @@ export type Greenspace = {
   plannedCrops: Array<cropTypes>
 };
 
-declare type farmingExperienceLevel = 'expert' | 'intermediate' | 'novice';
+export type farmingExperienceLevel = 'expert' | 'intermediate' | 'novice';
 export type farmingSkills = |
   'fruits' |
   'vegetables' |
