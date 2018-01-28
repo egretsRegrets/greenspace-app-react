@@ -61,6 +61,37 @@ export const paginationSlice = (items: Array<Object>, pageNumber: number, cardsP
   items.slice(pageNumber * cardsPerPage - (cardsPerPage - 1) - 1, pageNumber * cardsPerPage);
 
 /**
+ * Takes state of a single filter object and return array of the names of the selected filter options
+ * -- options are props of the filter object; if their value is true they are selected
+ * @param { {[filter: string]: {[filterOption: string]: boolean}} } filter - the filter object whose options are evaluated for selection
+ */
+const getSelectedFilterOptions = (filter: { [filterOption: string]: boolean }): Array<string> => {
+  const selectedFilterOptionKeys = Object.keys(filter).filter(filterOptionKey => filter[filterOptionKey]);
+  return selectedFilterOptionKeys;
+};
+
+/**
+ * takes a general 3d filters object and simplifies it to a 2d object
+ * - each prop key is the filter it represents. Each prop value is an array of the selected filter options for that filter
+ * @param {genFilters or { [filterType: string]: {[filter: string]: boolean} }} filters to map to the simpler filtersMapObj
+ */
+export const getSelectedFiltersMap = (filters: genFilters): { [filter: string]: Array<string> } => {
+  const filtersMapObj = {};
+  Object.keys(filters).forEach((filter: string) => {
+    const selectedFilterOptions = getSelectedFilterOptions(filters[filter]);
+    filtersMapObj[filter] = selectedFilterOptions;
+  });
+  return filtersMapObj;
+};
+
+export const filterStateIsInitial = (selectedFilterOptions: Array<string>) => {
+  if (selectedFilterOptions.includes('initial')) {
+    return true;
+  }
+  return false;
+};
+
+/**
  * => initialState obj for filters
  * @param {Object with any num props of any name of type Array<string> } filters - filter objects, keys are the filter name,
  *  vals are array of strings that translate to filter options
