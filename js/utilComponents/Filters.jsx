@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react';
-import FilterCatProps from '../const';
+import { FilterCatProps } from '../const';
 import FilterButtonRow from './FilterButtonRow';
 import { optionalComputedPropVal } from '../utils';
 
