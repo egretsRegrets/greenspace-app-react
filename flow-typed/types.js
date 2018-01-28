@@ -80,7 +80,7 @@ export type GreenspaceOwnerBrief = {
   desiredLandOwnerParticipation?: landOwnerParticipationLevels
 };
 
-export type UserFilteredEntities = FarmerBrief | Greenspace;
+export type UserFilteredEntities = Array<FarmerBrief> | Array<Greenspace>;
 
 // types for filters
 
