@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FarmerCardList from './FarmerCardList';
+import NoFilteredEntitiesMsg from './utilComponents/NoFilteredEntitiesMsg';
 import Filters from './utilComponents/Filters';
 import { NextPreviousBtns } from './utilComponents/PageControls';
 import { passFilterUpdateToSetter, setFilter, getSelectedFiltersMap, filterStateIsInitial } from './utils';
@@ -81,6 +82,7 @@ class Farmers extends Component<Props, State> {
             passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter)
           }
         />
+        <NoFilteredEntitiesMsg entities={this.filterFarmers()} entitiesType="farmers" />
         <FarmerCardList
           farmerCardList={this.filterFarmers()}
           // $FlowFixMe
