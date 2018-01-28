@@ -1,6 +1,6 @@
 // @flow
 
-export const FilterCatProps: FiltersProps = {
+const FilterCatProps: FiltersProps = {
   greenspaces: {
     filters: ['plotSize', 'farmerDesired'],
     titles: ['Plot Size', 'Seeking Farmers'],
@@ -55,8 +55,4 @@ export const FilterCatProps: FiltersProps = {
   }
 };
 
-export const noFilteredEntitiesMsgs = {
-  default: "Sorry, it doesn't look like we have what you're looking for.",
-  greenspaces: "Sorry, we don't have any greenspaces like that yet.",
-  farmers: "Sorry, we don't have any farmers like that yet."
-};
+export default FilterCatProps;
