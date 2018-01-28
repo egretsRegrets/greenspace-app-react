@@ -8,17 +8,24 @@ import { NextPreviousBtns } from './utilComponents/PageControls';
 import { passFilterUpdateToSetter, setFilter, getSelectedFiltersMap, filterStateIsInitial } from './utils';
 import { setFarmersFilters } from './actionCreators';
 
-// $FlowFixMe
-class Farmers extends Component {
-  constructor() {
-    super();
-    // $FlowFixMe
-    this.state = {
-      pageNumber: 1
-    };
-  }
+type Props = { farmers: Array<FarmerBrief>, filters: genFilters, filtersSetter: Function };
 
-  props: { farmers: Array<FarmerBrief>, filters: genFilters, filtersSetter: Function };
+type State = {
+  pageNumber: number
+};
+
+// $FlowFixMe
+class Farmers extends Component<Props, State> {
+  state = {
+    pageNumber: 1
+  };
+
+  componentWillReceiveProps(nextProps) {
+    // if filters will be changed, then we need to reset the current page to page 1
+    if (this.props.filters !== nextProps.filters) {
+      this.updatePage(1);
+    }
+  }
 
   updatePage = (val: number) =>
     // $FlowFixMe
