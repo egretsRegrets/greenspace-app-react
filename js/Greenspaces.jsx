@@ -18,9 +18,7 @@ class Greenspaces extends Component<Props, State> {
     pageNumber: 1
   };
 
-  updatePage = (val: number) =>
-    // $FlowFixMe
-    this.setState({ pageNumber: parseInt(val, 10) });
+  updatePage = (val: number) => this.setState({ pageNumber: parseInt(val, 10) });
 
   passesFarmerDesiredFilter = (farmerDesired: boolean, selectedFilters: Array<string>) => {
     if (selectedFilters.includes('yes')) {
