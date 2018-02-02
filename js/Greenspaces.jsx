@@ -11,22 +11,28 @@ import { passFilterUpdateToSetter, setFilter, getSelectedFiltersMap } from './ut
 
 type Props = { greenspaces: Array<Greenspace>, filters: genFilters, filtersSetter: Function };
 
-type State = { pageNumber: number };
+type State = { pageNumber: number, filteredGreenspaces: Array<Greenspace> };
 
 class Greenspaces extends Component<Props, State> {
   state = {
-    pageNumber: 1
+    pageNumber: 1,
+    filteredGreenspaces: this.props.greenspaces
   };
 
   componentWillReceiveProps(nextProps) {
     // if filters will be changed, then we need to reset the current page to page 1
     if (this.props.filters !== nextProps.filters) {
       this.updatePage(1);
+      this.updateFilteredGreenspaces(nextProps.filters);
     }
   }
 
   updatePage = (val: number) => this.setState({ pageNumber: parseInt(val, 10) });
+  updateFilteredGreenspaces = updatedFilters => {
+    this.setState({ filteredGreenspaces: this.filterGreenspaces(updatedFilters) });
+  };
 
+  // try refactor using class polymorphism
   passesFarmerDesiredFilter = (farmerDesired: boolean, selectedFilters: Array<string>) => {
     if (selectedFilters.includes('yes')) {
       // If no is also a selected filter than filters.farmerDesired is effectively 'either' and we don't filter any greenspaces
@@ -59,9 +65,9 @@ class Greenspaces extends Component<Props, State> {
     return false;
   };
 
-  filterGreenspaces = () => {
+  filterGreenspaces = updatedFilters => {
     const selectedFiltersMap: { plotSize: Array<string>, farmerDesired: Array<string> } = getSelectedFiltersMap(
-      this.props.filters
+      updatedFilters
     );
     const filteredGreenspaces = this.props.greenspaces.filter(
       (greenspace: Greenspace) =>
@@ -82,9 +88,9 @@ class Greenspaces extends Component<Props, State> {
             passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter)
           }
         />
-        <NoFilteredEntitiesMsg entities={this.filterGreenspaces()} entitiesType="greenspaces" />
+        <NoFilteredEntitiesMsg entities={this.state.filteredGreenspaces} entitiesType="greenspaces" />
         <GreenspaceCardList
-          greenspaceCardList={this.filterGreenspaces()}
+          greenspaceCardList={this.state.filteredGreenspaces}
           currentPageNumber={this.state.pageNumber}
           cardsPerPage={cardsPerPage}
         />
