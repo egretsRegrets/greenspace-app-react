@@ -5,62 +5,65 @@ import { connect } from 'react-redux';
 import { setGreenspacesFilters } from './actionCreators';
 import GreenspaceCardList from './GreenspaceCardList';
 import Filters from './utilComponents/Filters';
+// import NoFilteredEntitiesMsg from './utilComponents/NoFilteredEntitiesMsg';
 import { NextPreviousBtns } from './utilComponents/PageControls';
-import { passFilterUpdateToSetter, setFilter } from './utils';
+import { passFilterUpdateToSetter, setFilter, getSelectedFiltersMap } from './utils';
 
-// $FlowFixMe
-class Greenspaces extends Component {
-  constructor() {
-    super();
-    // $FlowFixMe
-    this.state = {
-      pageNumber: 1
-    };
-  }
+type Props = { greenspaces: Array<Greenspace>, filters: genFilters, filtersSetter: Function };
 
-  props: {
-    greenspaces: Array<Greenspace>,
-    filters: greenspacesFilters,
-    filtersSetter: Function
+type State = { pageNumber: number };
+
+class Greenspaces extends Component<Props, State> {
+  state = {
+    pageNumber: 1
   };
-
-  gsFilterNameCorrection = ['large plot', 'micro plot', 'backyard', 'front-yard', 'full-yard'];
 
   updatePage = (val: number) =>
     // $FlowFixMe
     this.setState({ pageNumber: parseInt(val, 10) });
 
-  passesPlotSizeFilters = (plotSizeTags: Array<greenspaceTags>): boolean => {
-    if (this.props.filters.plotSize.any === true) {
-      return true;
+  passesFarmerDesiredFilter = (farmerDesired: boolean, selectedFilters: Array<string>) => {
+    if (selectedFilters.includes('yes')) {
+      // If no is also a selected filter than filters.farmerDesired is effectively 'either' and we don't filter any greenspaces
+      if (selectedFilters.includes('no')) {
+        return true;
+      }
+      // greenspace.farmerDesired(true) === selectedFilters only element('yes')
+      if (farmerDesired) {
+        return true;
+      }
+      // greenspace.farmerDesired(false) !== selectedFilters only element('yes')
+      return false;
     }
-    const nameCorrectedFilters = Object.keys(this.props.filters.plotSize)
-      .slice(1)
-      .map((tag: string, index) => {
-        if (this.props.filters.plotSize[tag]) {
-          return this.gsFilterNameCorrection[index];
-        }
-        return null;
-      });
-    return nameCorrectedFilters.some(tag => plotSizeTags.indexOf(tag) >= 0);
-  };
-
-  passesSeekingFarmerFilters = (farmerDesired: boolean) => {
-    const seekingFarmer = this.props.filters.farmerDesired.yes;
-    const seeTheFarmers = this.props.filters.farmerDesired.no;
-    // filter.farmerDesired is in initial state
-    if (seekingFarmer && seeTheFarmers) {
-      return true;
-    }
-    // filter.farmerDesired.yes and greenspace.farmerDesired are true
-    if (seekingFarmer && farmerDesired) {
-      return true;
-    }
-    // filter.farmerDesired.no is true and greenspace.farmerDesired is false
-    if (seeTheFarmers && !farmerDesired) {
+    // greenspace.farmerDesired(false) === selectedFilters only element('no')
+    if (!farmerDesired) {
       return true;
     }
     return false;
+  };
+
+  passesPlotSizeFilter = (plotSize: Array<plotSize>, selectedFilters: Array<string>) => {
+    // if selectedFilters includes initial, then we return any filter - state is initial and nothing is being filtered out
+    if (selectedFilters.includes('initial')) {
+      return true;
+    }
+    const selectedFiltersIncludesPlotSize = plotSize.some(plotSizeTag => selectedFilters.includes(plotSizeTag));
+    if (selectedFiltersIncludesPlotSize) {
+      return true;
+    }
+    return false;
+  };
+
+  filterGreenspaces = () => {
+    const selectedFiltersMap: { plotSize: Array<string>, farmerDesired: Array<string> } = getSelectedFiltersMap(
+      this.props.filters
+    );
+    const filteredGreenspaces = this.props.greenspaces.filter(
+      (greenspace: Greenspace) =>
+        this.passesFarmerDesiredFilter(greenspace.farmerDesired, selectedFiltersMap.farmerDesired) &&
+        this.passesPlotSizeFilter(greenspace.plotSize, selectedFiltersMap.plotSize)
+    );
+    return filteredGreenspaces;
   };
 
   render() {
@@ -74,18 +77,14 @@ class Greenspaces extends Component {
             passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter)
           }
         />
+        {/* <NoFilteredEntitiesMsg entitiesType /> */}
         <GreenspaceCardList
-          greenspaceCardList={this.props.greenspaces.filter(
-            (greenspace: Greenspace) =>
-              this.passesPlotSizeFilters(greenspace.tags) && this.passesSeekingFarmerFilters(greenspace.farmerDesired)
-          )}
-          // $FlowFixMe
+          greenspaceCardList={this.filterGreenspaces()}
           currentPageNumber={this.state.pageNumber}
           cardsPerPage={cardsPerPage}
         />
         <div className="pl5">
           <NextPreviousBtns
-            // $FlowFixMe
             pageNumber={this.state.pageNumber}
             dataLength={this.props.greenspaces.length}
             cardsPerPage={cardsPerPage}
