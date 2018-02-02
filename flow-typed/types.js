@@ -10,7 +10,7 @@ var module: {
 };
 
 declare type farmerParticipationLevel = 'solo Farmer' | 'co-Farmer' | 'helping hand';
-export type greenspaceTags = 'backyard' | 'front-yard' | 'full-yard' | 'large plot' | 'micro plot';
+export type plotSize = 'backyard' | 'frontyard' | 'fullyard' | 'largePlot' | 'microPlot';
 declare type cropTypes = 'fruits' | 'vegetables' | 'herbs' | 'ornamental';
 
 export type Greenspace = {
@@ -20,7 +20,7 @@ export type Greenspace = {
   images?: Array<string>,
   address: string,
   description: string,
-  tags: Array<greenspaceTags>,
+  plotSize: Array<plotSize>,
   farmerDesired: boolean,
   farmerParticipation: farmerParticipationLevel,
   landownerID: string,

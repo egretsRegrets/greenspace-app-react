@@ -43,7 +43,7 @@ const GreenspaceCard = (props: Greenspace) => {
           <div className="bt b--black-10">
             <div className="flex mt4 mb2 ph4 avenir">
               <ul className="w-50 mt0 pl3 tl">
-                {props.tags.map(tag => (
+                {props.plotSize.map(tag => (
                   <li key={tag} className="mv1 ttc f6 dark-green">
                     {tag}
                   </li>

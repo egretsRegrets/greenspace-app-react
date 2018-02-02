@@ -15,7 +15,7 @@
       "address": "374 Orange Street, Waterloo, South Carolina, 3987",
       "description":
         "Qui nisi commodo quis nostrud laboris deserunt culpa magna esse excepteur veniam sint ad qui. Consequat elit nulla nostrud velit ex incididunt laboris irure. Duis aute proident adipisicing reprehenderit labore deserunt fugiat Lorem voluptate.",
-      "tags": ["large plot", "full-yard"],
+      "plotSize": ["largePlot", "fullyard"],
       "farmerDesired": false,
       "farmerParticipation": "solo Farmer",
       "landownerID": "5a3074b78c2fef51baf5a3df"
@@ -35,7 +35,7 @@
       "address": "701 Tech Place, Neahkahnie, Indiana, 8091",
       "description":
         "Irure reprehenderit aliqua ipsum ipsum Lorem occaecat dolore mollit deserunt aute. Anim incididunt deserunt ullamco quis eiusmod occaecat incididunt mollit cupidatat do sint non dolore sit. Culpa esse voluptate exercitation id laboris amet. Incididunt nisi sit ipsum adipisicing esse aute ad nostrud commodo. Deserunt duis incididunt mollit consequat. Ex ipsum aute esse nisi Lorem sit fugiat fugiat ullamco commodo nostrud incididunt.",
-      "tags": ["full-yard", "backyard"],
+      "plotSize": ["fullyard", "backyard"],
       "farmerDesired": false,
       "farmerParticipation": "co-Farmer",
       "landownerID": "5a3074b7be2c7a50947ccb4e"
@@ -55,7 +55,7 @@
       "address": "801 Rost Place, Bannock, Virgin Islands, 4334",
       "description":
         "Aliqua aute sint id sit non aliqua ex laborum. Adipisicing irure mollit ut occaecat veniam aliqua. Non enim esse dolor ut ullamco eu adipisicing Lorem excepteur amet. Ipsum tempor et est id proident culpa.",
-      "tags": ["micro plot"],
+      "plotSize": ["microPlot"],
       "farmerDesired": true,
       "farmerParticipation": "co-Farmer",
       "landownerID": "5a3074b72b40d9857018bf07"
@@ -76,7 +76,7 @@
       "address": "406 Garden Street, Cucumber, Nevada, 9377",
       "description":
         "Velit ex consectetur dolore irure non nostrud elit. Est dolore voluptate nisi quis officia nostrud nisi laborum commodo esse ipsum officia deserunt quis. Cillum minim dolor velit et commodo aliquip laborum. Adipisicing labore aliquip minim tempor nulla adipisicing ut aliquip veniam aliqua ad. Nisi labore veniam sunt elit exercitation eiusmod non exercitation esse. Irure aute mollit dolor eu excepteur ad velit laboris pariatur amet aute tempor. Esse velit ea cillum sunt consequat dolor Lorem ullamco laboris.",
-      "tags": ["large plot", "full-yard"],
+      "plotSize": ["largePlot", "fullyard"],
       "farmerDesired": true,
       "farmerParticipation": "co-Farmer",
       "landownerID": "5a3074b7428b005e4459da17"
@@ -97,7 +97,7 @@
       "address": "530 Argyle Road, Lafferty, Washington, 8011",
       "description":
         "Ad sit minim eiusmod occaecat amet non elit excepteur anim nostrud voluptate magna occaecat anim. Elit irure deserunt nulla cillum aliqua aliqua irure qui culpa ullamco est. Consequat irure dolor commodo culpa laborum ad. Aute nostrud cillum sint fugiat esse eiusmod. Est ex dolor ea ad amet esse dolor non. Sit duis aliqua enim fugiat. Incididunt adipisicing officia nostrud dolore exercitation officia id aliqua proident veniam.",
-      "tags": ["backyard"],
+      "plotSize": ["backyard"],
       "farmerDesired": true,
       "farmerParticipation": "co-Farmer",
       "landownerID": "5a3074b7a97731d253b3e473"
@@ -117,7 +117,7 @@
       "address": "509 Oakland Place, Linganore, Illinois, 1480",
       "description":
         "Mollit culpa cupidatat excepteur nostrud incididunt dolore occaecat officia pariatur laboris cupidatat. Anim id nostrud laboris amet occaecat pariatur. Sit excepteur occaecat cupidatat cillum aliqua eiusmod dolore. Amet nostrud sit aute eiusmod ad aliquip adipisicing sunt nulla laborum. Aute ex voluptate aliquip nostrud.",
-      "tags": ["micro plot", "backyard"],
+      "plotSize": ["microPlot", "backyard"],
       "farmerDesired": true,
       "farmerParticipation": "co-Farmer",
       "landownerID": "5a3074b71cd1395026284cb0"
@@ -138,7 +138,7 @@
       "address": "100 Highlawn Avenue, Crumpler, California, 4109",
       "description":
         "Commodo qui mollit commodo labore nostrud sunt ad quis culpa esse. Minim veniam culpa elit laborum. Non ullamco magna consequat et magna ut ad laborum magna est.",
-      "tags": ["large plot", "backyard"],
+      "plotSize": ["largePlot", "backyard"],
       "farmerDesired": true,
       "farmerParticipation": "helping Hand",
       "landownerID": "5a3074b7c9bcb26a5ad77320"
@@ -151,7 +151,7 @@
       "address": "924 Remsen Street, Southmont, Guam, 8842",
       "description":
         "Officia sunt adipisicing nulla eu excepteur amet nostrud id. Ea ut nulla est proident in eiusmod mollit aute eiusmod Lorem exercitation ipsum cupidatat. Veniam non non pariatur sint ad qui voluptate veniam pariatur qui irure. Aute exercitation do mollit est sint eu exercitation minim est ex ea. Amet nostrud reprehenderit enim quis deserunt consectetur ullamco. Anim dolor officia exercitation laboris mollit reprehenderit est duis Lorem non officia adipisicing enim mollit.",
-      "tags": ["micro plot", "front-yard"],
+      "plotSize": ["microPlot", "frontyard"],
       "farmerDesired": false,
       "farmerParticipation": "helping Hand",
       "landownerID": "5a3074b7cb011adf479c33e6"

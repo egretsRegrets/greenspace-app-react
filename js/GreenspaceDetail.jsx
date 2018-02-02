@@ -163,7 +163,7 @@ class GreenspaceDetail extends Component {
           <div className="pt5 ph6">
             <div>
               <ul className="pl0 list">
-                {this.props.greenspace.tags.map(tag => (
+                {this.props.greenspace.plotSize.map(tag => (
                   <li className="mr3 dib lh-copy f5 ttc b i green avenir" key={tag}>
                     {tag}
                   </li>
