@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { setGreenspacesFilters } from './actionCreators';
 import GreenspaceCardList from './GreenspaceCardList';
 import Filters from './utilComponents/Filters';
-// import NoFilteredEntitiesMsg from './utilComponents/NoFilteredEntitiesMsg';
+import NoFilteredEntitiesMsg from './utilComponents/NoFilteredEntitiesMsg';
 import { NextPreviousBtns } from './utilComponents/PageControls';
 import { passFilterUpdateToSetter, setFilter, getSelectedFiltersMap } from './utils';
 
@@ -17,6 +17,13 @@ class Greenspaces extends Component<Props, State> {
   state = {
     pageNumber: 1
   };
+
+  componentWillReceiveProps(nextProps) {
+    // if filters will be changed, then we need to reset the current page to page 1
+    if (this.props.filters !== nextProps.filters) {
+      this.updatePage(1);
+    }
+  }
 
   updatePage = (val: number) => this.setState({ pageNumber: parseInt(val, 10) });
 
@@ -75,7 +82,7 @@ class Greenspaces extends Component<Props, State> {
             passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter)
           }
         />
-        {/* <NoFilteredEntitiesMsg entitiesType /> */}
+        <NoFilteredEntitiesMsg entities={this.filterGreenspaces()} entitiesType="greenspaces" />
         <GreenspaceCardList
           greenspaceCardList={this.filterGreenspaces()}
           currentPageNumber={this.state.pageNumber}
