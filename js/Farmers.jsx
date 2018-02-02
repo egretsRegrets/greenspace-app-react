@@ -15,7 +15,6 @@ type State = {
   pageNumber: number
 };
 
-// $FlowFixMe
 class Farmers extends Component<Props, State> {
   state = {
     pageNumber: 1
@@ -28,9 +27,7 @@ class Farmers extends Component<Props, State> {
     }
   }
 
-  updatePage = (val: number) =>
-    // $FlowFixMe
-    this.setState({ pageNumber: parseInt(val, 10) });
+  updatePage = (val: number) => this.setState({ pageNumber: parseInt(val, 10) });
 
   passesExperienceFilter = (farmerExperience: farmingExperienceLevel, selectedFilters: Array<string>) => {
     if (filterStateIsInitial(selectedFilters)) {
@@ -85,12 +82,10 @@ class Farmers extends Component<Props, State> {
         <NoFilteredEntitiesMsg entities={this.filterFarmers()} entitiesType="farmers" />
         <FarmerCardList
           farmerCardList={this.filterFarmers()}
-          // $FlowFixMe
           currentPageNumber={this.state.pageNumber}
           cardsPerPage={cardsPerPage}
         />
         <NextPreviousBtns
-          // $FlowFixMe
           pageNumber={this.state.pageNumber}
           dataLength={this.filterFarmers().length}
           cardsPerPage={cardsPerPage}
