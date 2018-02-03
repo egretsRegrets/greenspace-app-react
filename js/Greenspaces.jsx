@@ -97,7 +97,7 @@ class Greenspaces extends Component<Props, State> {
         <div className="pl5">
           <NextPreviousBtns
             pageNumber={this.state.pageNumber}
-            dataLength={this.props.greenspaces.length}
+            dataLength={this.state.filteredGreenspaces.length}
             cardsPerPage={cardsPerPage}
             clickHandler={this.updatePage}
           />
