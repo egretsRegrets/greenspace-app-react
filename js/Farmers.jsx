@@ -12,22 +12,26 @@ import { setFarmersFilters } from './actionCreators';
 type Props = { farmers: Array<FarmerBrief>, filters: genFilters, filtersSetter: Function };
 
 type State = {
-  pageNumber: number
+  pageNumber: number,
+  filteredFarmers: Array<FarmerBrief>
 };
 
 class Farmers extends Component<Props, State> {
   state = {
-    pageNumber: 1
+    pageNumber: 1,
+    filteredFarmers: this.props.farmers
   };
 
   componentWillReceiveProps(nextProps) {
     // if filters will be changed, then we need to reset the current page to page 1
     if (this.props.filters !== nextProps.filters) {
       this.updatePage(1);
+      this.updateFilteredFarmers(nextProps.filters);
     }
   }
 
   updatePage = (val: number) => this.setState({ pageNumber: parseInt(val, 10) });
+  updateFilteredFarmers = updatedFilters => this.setState({ filteredFarmers: this.filterFarmers(updatedFilters) });
 
   passesExperienceFilter = (farmerExperience: farmingExperienceLevel, selectedFilters: Array<string>) => {
     if (filterStateIsInitial(selectedFilters)) {
@@ -55,9 +59,9 @@ class Farmers extends Component<Props, State> {
     return false;
   };
 
-  filterFarmers = () => {
+  filterFarmers = updatedFilters => {
     const selectedFiltersMap: { experience: Array<string>, skills: Array<string> } = getSelectedFiltersMap(
-      this.props.filters
+      updatedFilters
     );
     const filteredFarmers = this.props.farmers.filter(
       farmer =>
@@ -79,15 +83,15 @@ class Farmers extends Component<Props, State> {
             passFilterUpdateToSetter(resolveFiltersParams, this.props.filtersSetter)
           }
         />
-        <NoFilteredEntitiesMsg entities={this.filterFarmers()} entitiesType="farmers" />
+        <NoFilteredEntitiesMsg entities={this.state.filteredFarmers} entitiesType="farmers" />
         <FarmerCardList
-          farmerCardList={this.filterFarmers()}
+          farmerCardList={this.state.filteredFarmers}
           currentPageNumber={this.state.pageNumber}
           cardsPerPage={cardsPerPage}
         />
         <NextPreviousBtns
           pageNumber={this.state.pageNumber}
-          dataLength={this.filterFarmers().length}
+          dataLength={this.state.filteredFarmers.length}
           cardsPerPage={cardsPerPage}
           clickHandler={this.updatePage}
         />
